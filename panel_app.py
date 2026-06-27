@@ -456,5 +456,28 @@ def api_list_photos():
         return jsonify({"error": str(e)}), 500
 
 
+
+@app.route('/api/check_result')
+@login_required
+def api_check_result():
+    """获取最近一次自动检测结果"""
+    try:
+        resp = requests.get(f"{ENGINE_URL}/check_result", timeout=10)
+        return jsonify(resp.json())
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route('/api/manual_check', methods=['POST'])
+@login_required
+def api_manual_check():
+    """手动触发一次Bot检测"""
+    try:
+        resp = requests.post(f"{ENGINE_URL}/manual_check", timeout=10)
+        return jsonify(resp.json())
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=False)

@@ -73,6 +73,26 @@
         .loading { color: #f39c12; text-align: center; padding: 20px; }
         
         .refresh-btn-sm { background: none; border: 1px solid #00d4ff; color: #00d4ff; padding: 4px 10px; border-radius: 4px; cursor: pointer; font-size: 12px; }
+
+        .check-section { background: #1a2744; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+        .check-section h3 { color: #9b59b6; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }
+        .check-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px; margin-bottom: 15px; }
+        .check-stat { background: #0d1b2a; border-radius: 8px; padding: 12px; text-align: center; }
+        .check-stat .num { font-size: 24px; font-weight: bold; }
+        .check-stat .num.ok { color: #00cc66; }
+        .check-stat .num.fixed { color: #f39c12; }
+        .check-stat .num.failed { color: #ff4444; }
+        .check-stat .lbl { font-size: 11px; color: #8899aa; margin-top: 3px; }
+        .check-time { color: #8899aa; font-size: 12px; }
+        .check-details { max-height: 200px; overflow-y: auto; margin-top: 10px; }
+        .check-detail-item { display: flex; align-items: center; gap: 8px; padding: 4px 8px; font-size: 12px; border-bottom: 1px solid #0d1b2a; }
+        .check-detail-item .dot { width: 8px; height: 8px; border-radius: 50%; }
+        .check-detail-item .dot.ok { background: #00cc66; }
+        .check-detail-item .dot.fixed { background: #f39c12; }
+        .check-detail-item .dot.failed { background: #ff4444; }
+        .btn-check-now { background: linear-gradient(135deg, #9b59b6, #8e44ad); color: #fff; padding: 6px 14px; border: none; border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: bold; }
+        .btn-check-now:hover { opacity: 0.9; }
+        .btn-check-now:disabled { opacity: 0.5; cursor: not-allowed; }
     </style>
 </head>
 <body>
@@ -96,6 +116,26 @@
     <div class="lines-section">
         <h3>线路分配规则（添加Bot时自动按编号分配代理IP）</h3>
         <div class="lines-grid" id="lines-display"></div>
+    </div>
+
+
+    <div class="check-section">
+        <h3>水军自动检测（每小时自动检测Bot广告状态）
+            <div>
+                <span class="check-time" id="check-time">上次检测: --</span>
+                <button class="btn-check-now" id="btn-manual-check" onclick="manualCheck()">立即检测</button>
+            </div>
+        </h3>
+        <div class="check-stats">
+            <div class="check-stat"><div class="num ok" id="check-ok">--</div><div class="lbl">正常</div></div>
+            <div class="check-stat"><div class="num fixed" id="check-fixed">--</div><div class="lbl">已修复</div></div>
+            <div class="check-stat"><div class="num failed" id="check-failed">--</div><div class="lbl">失败</div></div>
+            <div class="check-stat"><div class="num" id="check-total" style="color:#00d4ff">--</div><div class="lbl">总检测</div></div>
+        </div>
+        <div class="check-details" id="check-details" style="display:none">
+            <div style="color:#8899aa;font-size:11px;margin-bottom:5px">异常Bot详情:</div>
+            <div id="check-details-list"></div>
+        </div>
     </div>
 
     <div class="actions">
@@ -548,6 +588,86 @@
         document.getElementById('search-bot-number').addEventListener('keydown', function(e) {
             if (e.key === 'Enter') searchBot();
         });
+
+
+        // ===== 检测结果功能 =====
+        async function loadCheckResult() {
+            try {
+                const data = await fetchAPI(`${API_BASE}/api/check_result`);
+                if (data.error) {
+                    document.getElementById('check-time').textContent = '上次检测: 暂无记录';
+                    return;
+                }
+                document.getElementById('check-time').textContent = '上次检测: ' + (data.time || '--');
+                document.getElementById('check-ok').textContent = data.ok || 0;
+                document.getElementById('check-fixed').textContent = data.fixed || 0;
+                document.getElementById('check-failed').textContent = data.failed || 0;
+                document.getElementById('check-total').textContent = data.total || 0;
+                
+                // 显示异常Bot详情
+                const details = (data.details || []).filter(d => d.status !== 'ok');
+                if (details.length > 0) {
+                    document.getElementById('check-details').style.display = 'block';
+                    let html = '';
+                    for (const d of details.slice(0, 30)) {
+                        const dotClass = d.status === 'fixed' ? 'fixed' : 'failed';
+                        const info = d.action || d.error || d.status;
+                        html += `<div class="check-detail-item">
+                            <span class="dot ${dotClass}"></span>
+                            <span style="color:#00d4ff">Bot #${d.number}</span>
+                            <span style="color:#ccc">${info}</span>
+                        </div>`;
+                    }
+                    if (details.length > 30) {
+                        html += `<div style="color:#8899aa;padding:4px 8px;font-size:11px">...还有 ${details.length - 30} 个</div>`;
+                    }
+                    document.getElementById('check-details-list').innerHTML = html;
+                } else {
+                    document.getElementById('check-details').style.display = 'none';
+                }
+            } catch(e) {
+                // 静默失败
+            }
+        }
+
+        async function manualCheck() {
+            const btn = document.getElementById('btn-manual-check');
+            btn.disabled = true;
+            btn.textContent = '检测中...';
+            try {
+                await fetchAPI(`${API_BASE}/api/manual_check`, { method: 'POST' });
+                // 等待检测完成（轮询结果）
+                let attempts = 0;
+                const pollInterval = setInterval(async () => {
+                    attempts++;
+                    try {
+                        const data = await fetchAPI(`${API_BASE}/api/check_result`);
+                        if (data.time && !data.error) {
+                            // 检查时间是否是最近2分钟内的
+                            clearInterval(pollInterval);
+                            btn.disabled = false;
+                            btn.textContent = '立即检测';
+                            loadCheckResult();
+                        }
+                    } catch(e) {}
+                    if (attempts > 60) { // 最多等5分钟
+                        clearInterval(pollInterval);
+                        btn.disabled = false;
+                        btn.textContent = '立即检测';
+                        loadCheckResult();
+                    }
+                }, 5000);
+            } catch(e) {
+                btn.disabled = false;
+                btn.textContent = '立即检测';
+                alert('触发检测失败: ' + e.message);
+            }
+        }
+
+        // 页面加载时加载检测结果
+        loadCheckResult();
+        // 每60秒刷新检测结果
+        setInterval(loadCheckResult, 60000);
 
         // 页面加载时自动刷新
         refreshStatus();

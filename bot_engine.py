@@ -23,24 +23,24 @@ PORT = 8899
 
 # 代理线路配置
 PROXY_LINES = {
-    1: {"proxy": "socks5://sSxA669yDqru:F2keVQvoiIh6@198.65.51.89:7055", "range": (1, 8)},
-    2: {"proxy": "socks5://pTVGUfSlyk03:bD3riHOujtIQ@198.65.51.197:7055", "range": (9, 16)},
-    3: {"proxy": "socks5://3gLbefgNLqcq:iHK8DaMD2euS@198.65.51.130:7055", "range": (17, 24)},
-    4: {"proxy": "socks5://XZQKcp9iOLZU:f5VOUl2BRxZP@198.65.51.42:7055", "range": (25, 32)},
-    5: {"proxy": "socks5://v4eH6NpbFJAy:GhOBzRkyH0Nd@198.65.51.96:7055", "range": (33, 40)},
-    6: {"proxy": "socks5://qrsp9E9hacN5:sViGpZTysqDG@198.65.51.180:7055", "range": (41, 48)},
-    7: {"proxy": "socks5://R8EFXJPeO4sA:tH8RTX0P6jYd@198.65.51.249:7055", "range": (49, 56)},
-    8: {"proxy": "socks5://0R9YhHcxXS0l:F9DFTCAEGBif@198.65.51.173:7055", "range": (57, 64)},
-    9: {"proxy": "socks5://qFdHKT1NaC0w:tavEbNB2sPQD@198.65.51.216:7055", "range": (65, 72)},
-    10: {"proxy": "socks5://9eX0k27E75ha:n4CiaWqzs4hE@207.45.13.233:45835", "range": (73, 80)},
-    11: {"proxy": "socks5://6ac9tKhgBrvD:UU6VUy9ca13U@198.65.96.124:7439", "range": (81, 88)},
-    12: {"proxy": "socks5://Po5TxkDfStSu:pFPULHEu1Kpi@198.65.28.51:7037", "range": (89, 96)},
-    13: {"proxy": "socks5://HKJ3er9sblgH:AQBXJoHCKGvO@198.65.112.50:6935", "range": (97, 104)},
-    14: {"proxy": "socks5://aJt0S20Qr5QC:Pza9DEyv1MDN@198.65.47.100:7471", "range": (105, 112)},
-    15: {"proxy": "socks5://QHMCr34mQevI:Pmn9lPrzYmEN@198.65.51.124:7055", "range": (113, 120)},
-    16: {"proxy": "socks5://6iutAedgZfpC:mJJCvY8WV5z7@198.65.126.41:45623", "range": (121, 128)},
-    17: {"proxy": "socks5://cLaYWRgmtrT2:4tNcYgLIEgnQ@157.238.73.209:36337", "range": (129, 136)},
-    18: {"proxy": "socks5://pcLLjaXzjnPm:xA9gWEmu5tXW@204.1.89.177:44755", "range": (137, 144)},
+    1: {"proxy": "socks5://sSxA669yDqru:F2keVQvoiIh6@198.65.51.89:7055", "range": (1, 9)},
+    2: {"proxy": "socks5://pTVGUfSlyk03:bD3riHOujtIQ@198.65.51.197:7055", "range": (10, 18)},
+    3: {"proxy": "socks5://3gLbefgNLqcq:iHK8DaMD2euS@198.65.51.130:7055", "range": (19, 27)},
+    4: {"proxy": "socks5://XZQKcp9iOLZU:f5VOUl2BRxZP@198.65.51.42:7055", "range": (28, 36)},
+    5: {"proxy": "socks5://v4eH6NpbFJAy:GhOBzRkyH0Nd@198.65.51.96:7055", "range": (37, 45)},
+    6: {"proxy": "socks5://qrsp9E9hacN5:sViGpZTysqDG@198.65.51.180:7055", "range": (46, 54)},
+    7: {"proxy": "socks5://R8EFXJPeO4sA:tH8RTX0P6jYd@198.65.51.249:7055", "range": (55, 63)},
+    8: {"proxy": "socks5://0R9YhHcxXS0l:F9DFTCAEGBif@198.65.51.173:7055", "range": (64, 72)},
+    9: {"proxy": "socks5://qFdHKT1NaC0w:tavEbNB2sPQD@198.65.51.216:7055", "range": (73, 81)},
+    10: {"proxy": "socks5://9eX0k27E75ha:n4CiaWqzs4hE@207.45.13.233:45835", "range": (82, 90)},
+    11: {"proxy": "socks5://6ac9tKhgBrvD:UU6VUy9ca13U@198.65.96.124:7439", "range": (91, 99)},
+    12: {"proxy": "socks5://Po5TxkDfStSu:pFPULHEu1Kpi@198.65.28.51:7037", "range": (100, 108)},
+    13: {"proxy": "socks5://HKJ3er9sblgH:AQBXJoHCKGvO@198.65.112.50:6935", "range": (109, 117)},
+    14: {"proxy": "socks5://aJt0S20Qr5QC:Pza9DEyv1MDN@198.65.47.100:7471", "range": (118, 126)},
+    15: {"proxy": "socks5://QHMCr34mQevI:Pmn9lPrzYmEN@198.65.51.124:7055", "range": (127, 135)},
+    16: {"proxy": "socks5://6iutAedgZfpC:mJJCvY8WV5z7@198.65.126.41:45623", "range": (136, 144)},
+    17: {"proxy": "socks5://cLaYWRgmtrT2:4tNcYgLIEgnQ@157.238.73.209:36337", "range": (145, 153)},
+    18: {"proxy": "socks5://pcLLjaXzjnPm:xA9gWEmu5tXW@204.1.89.177:44755", "range": (154, 162)},
 }
 
 logging.basicConfig(
@@ -174,6 +174,7 @@ class BotEngine:
         self.ad_config = {}
         self.running = False
         self.polling_tasks = {}
+        self.last_check_result = None
         self.clients = {}  # proxy_url -> httpx.AsyncClient
         self.load_config()
         self.load_stats()
@@ -422,13 +423,28 @@ class BotEngine:
 
     async def send_ad_to_chat(self, token, proxy_url, chat_id):
         """发送广告到指定聊天"""
-        if not self.ad_config:
-            # 没有广告配置，发送提示
-            client = await self.get_client(proxy_url)
-            url = f"https://api.telegram.org/bot{token}/sendMessage"
-            payload = {"chat_id": chat_id, "text": "🇲🇾 暂无广告素材。"}
-            await client.post(url, json=payload)
-            return {"ok": False}
+        if not self.ad_config or not self.ad_config.get('text'):
+            # 没有广告配置，尝试重新加载
+            await self.reload_ad_config()
+            if not self.ad_config or not self.ad_config.get('text'):
+                # 仍然没有，使用默认广告
+                self.ad_config = {
+                    "name": "default_ad",
+                    "text": "✨ 欢迎光临快约到家 ✨\n\n🇲🇾 马来西亚专业上门服务\n✅ 正规按摩 · 安全放心\n✅ 美女技师 · 服务专业\n✅ 全城覆盖 · 快速上门\n\n📱 官网: www.kuaiyue.vip\n📢 频道: @kuaiyue9\n💬 咨询: @kuaiyue777",
+                    "buttons": [
+                        [{"text": "🌐 访问官网", "url": "https://www.kuaiyue.vip"}],
+                        [{"text": "📢 加入频道", "url": "https://t.me/kuaiyue9"}],
+                        [{"text": "💬 在线咨询", "url": "https://t.me/kuaiyue777"}]
+                    ]
+                }
+                # 保存默认配置到文件
+                import json as _json
+                try:
+                    with open('/root/bot_panel/data/ad_config.json', 'w', encoding='utf-8') as _f:
+                        _json.dump(self.ad_config, _f, ensure_ascii=False, indent=2)
+                    logger.info("自动创建默认广告配置")
+                except:
+                    pass
 
         try:
             client = await self.get_client(proxy_url)
@@ -1221,6 +1237,132 @@ class BotEngine:
             logger.error(f"Bot#{number} setup_profile error: {e}")
 
 
+
+    async def auto_check_loop(self):
+        """每小时自动检测所有Bot是否正常返回广告，异常的自动修复"""
+        logger.info("自动检测循环启动 - 每小时检测一次Bot广告状态")
+        first_run = True
+        while True:
+            try:
+                await asyncio.sleep(300 if not hasattr(self, "_first_check_done") else 3600)  # 首次5分钟后，之后每小时
+                logger.info("=== 开始自动检测所有Bot广告状态 ===")
+                await self.run_auto_check()
+            except asyncio.CancelledError:
+                break
+            except Exception as e:
+                logger.error(f"自动检测循环异常: {e}")
+                await asyncio.sleep(60)
+
+    async def run_auto_check(self):
+        """执行一次完整的Bot检测和修复"""
+        check_results = {
+            "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "total": len(self.bots),
+            "ok": 0,
+            "fixed": 0,
+            "failed": 0,
+            "details": []
+        }
+        
+        for bot_id, bot in list(self.bots.items()):
+            number = bot['number']
+            token = bot['token']
+            proxy_url = get_proxy_for_number(number)
+            
+            result = await self.check_and_fix_bot(bot_id, bot, token, proxy_url)
+            check_results['details'].append(result)
+            
+            if result['status'] == 'ok':
+                check_results['ok'] += 1
+            elif result['status'] == 'fixed':
+                check_results['fixed'] += 1
+            else:
+                check_results['failed'] += 1
+            
+            # 每个Bot间隔0.3秒
+            await asyncio.sleep(0.3)
+        
+        # 保存检测结果
+        self.last_check_result = check_results
+        self._first_check_done = True
+        check_file = '/root/bot_panel/data/last_check.json'
+        with open(check_file, 'w') as f:
+            json.dump(check_results, f, indent=2, ensure_ascii=False)
+        
+        logger.info(f"=== 检测完成: 正常{check_results['ok']} 修复{check_results['fixed']} 失败{check_results['failed']} ===")
+        return check_results
+
+    async def check_and_fix_bot(self, bot_id, bot, token, proxy_url):
+        """检测单个Bot并自动修复（优化版：不使用getUpdates避免409）"""
+        number = bot['number']
+        result = {"number": number, "bot_id": bot_id}
+        try:
+            client = await self.get_client(proxy_url)
+            # 步骤1: 检查Bot是否在线（getMe - 快速且不会冲突）
+            url = f"https://api.telegram.org/bot{token}/getMe"
+            resp = await client.get(url, timeout=8)
+            data = resp.json()
+            if not data.get('ok'):
+                result['status'] = 'failed'
+                result['error'] = data.get('description', 'Token无效')
+                logger.warning(f"Bot #{number} Token无效: {data.get('description','')}")
+                return result
+            # 步骤2: 检查是否在polling中
+            if bot_id not in self.polling_tasks or self.polling_tasks[bot_id].done():
+                # Bot不在polling中，重新启动
+                logger.warning(f"Bot #{number} polling已停止，重新启动")
+                self.polling_tasks[bot_id] = asyncio.create_task(self.poll_bot(bot_id))
+                result['status'] = 'fixed'
+                result['action'] = '重启polling'
+                return result
+            # 步骤3: 检查广告配置是否存在
+            if not self.ad_config or not self.ad_config.get('text'):
+                await self.reload_ad_config()
+                if not self.ad_config:
+                    result['status'] = 'failed'
+                    result['error'] = '广告配置缺失'
+                    return result
+            # Bot在线且polling正常
+            result['status'] = 'ok'
+        except Exception as e:
+            error_msg = str(e)[:80]
+            logger.warning(f"Bot #{number} 检测异常: {error_msg}")
+            # 尝试修复：重启polling
+            try:
+                if bot_id in self.polling_tasks:
+                    self.polling_tasks[bot_id].cancel()
+                    await asyncio.sleep(1)
+                self.polling_tasks[bot_id] = asyncio.create_task(self.poll_bot(bot_id))
+                result['status'] = 'fixed'
+                result['action'] = f'异常修复: {error_msg}'
+            except:
+                result['status'] = 'failed'
+                result['error'] = error_msg
+        return result
+    async def reload_ad_config(self):
+        """重新加载广告配置"""
+        try:
+            if os.path.exists(AD_CONFIG_FILE):
+                with open(AD_CONFIG_FILE) as f:
+                    self.ad_config = json.load(f)
+                logger.info("广告配置已重新加载")
+        except Exception as e:
+            logger.error(f"重新加载广告配置失败: {e}")
+
+    async def handle_check_result(self, request):
+        """获取最近一次检测结果"""
+        check_file = '/root/bot_panel/data/last_check.json'
+        if os.path.exists(check_file):
+            with open(check_file) as f:
+                data = json.load(f)
+            return web.json_response(data)
+        return web.json_response({"error": "暂无检测记录"})
+
+    async def handle_manual_check(self, request):
+        """手动触发一次检测"""
+        asyncio.create_task(self.run_auto_check())
+        return web.json_response({"ok": True, "message": "检测已启动，请稍后查看结果"})
+
     async def handle_health_check(self, request):
         """批量验证Bot Token"""
         results = []
@@ -1260,6 +1402,8 @@ async def main():
     app.router.add_post('/set_profile', engine.handle_set_profile)
     app.router.add_post('/health_check', engine.handle_health_check)
     app.router.add_get('/profile_progress', engine.handle_profile_progress)
+    app.router.add_get('/check_result', engine.handle_check_result)
+    app.router.add_post('/manual_check', engine.handle_manual_check)
     app.router.add_post('/upload_photos', engine.handle_upload_photos)
     app.router.add_get('/list_photos', engine.handle_list_photos)
 
@@ -1274,6 +1418,7 @@ async def main():
 
     # 启动后自动为未设置简介的Bot修改简介
     asyncio.create_task(engine.auto_set_all_profiles())
+    asyncio.create_task(engine.auto_check_loop())
     # 保持运行
     try:
         while True:

@@ -1,1 +1,87 @@
-{}
+{
+  "apis": [
+    {
+      "api_id": 31034207,
+      "api_hash": "c6d49c6a93371381efb3fa3033d7c73a"
+    },
+    {
+      "api_id": 37900420,
+      "api_hash": "417d6f1b7e58418e81dff5b2c4f33943"
+    },
+    {
+      "api_id": 38928927,
+      "api_hash": "e5e54a03a61c3c9083899d9dffecabaf"
+    },
+    {
+      "api_id": 36961078,
+      "api_hash": "d4d9bafec6afed118856cd20f0c88c9a"
+    },
+    {
+      "api_id": 36404424,
+      "api_hash": "4fe722fcee7095dd78dab10ce3a7d1f0"
+    },
+    {
+      "api_id": 39269216,
+      "api_hash": "1114d86031ed03ce4aeec6e4a03be84d"
+    },
+    {
+      "api_id": 39249840,
+      "api_hash": "6f84364761b7a35af521a5bd5efec612"
+    },
+    {
+      "api_id": 14530972,
+      "api_hash": "4cb9f0631f064eab9bfb5e3b19E24E2"
+    },
+    {
+      "api_id": 31864297,
+      "api_hash": "4f285240ee6703396489c530876804a2"
+    },
+    {
+      "api_id": 33219075,
+      "api_hash": "9a0290f6951c020dcb15ff03096ceda3"
+    },
+    {
+      "api_id": 24701885,
+      "api_hash": "6FE8f295d213368f7b489982c68d6b6d"
+    },
+    {
+      "api_id": 34783567,
+      "api_hash": "0651774c408e8aec6b0972a9d6cc58a1"
+    },
+    {
+      "api_id": 31055556,
+      "api_hash": "7df74caff42422020f952cc5b532d1b5"
+    },
+    {
+      "api_id": 32053459,
+      "api_hash": "da7eab7df5996fe90188c628d6c128c2"
+    },
+    {
+      "api_id": 33853337,
+      "api_hash": "49bc1f37ae5a5ea5732215af2b336a5c"
+    },
+    {
+      "api_id": 32885401,
+      "api_hash": "08e5c4b9befafd18488e88a5d26c1645"
+    },
+    {
+      "api_id": 31351042,
+      "api_hash": "fd6d872bbccde181291ba561d07bc62a"
+    },
+    {
+      "api_id": 31016054,
+      "api_hash": "bda2382b78864bc45219b1aec4ea9e5b"
+    },
+    {
+      "api_id": 33835697,
+      "api_hash": "c1b216558292e093a5cfd6060e72ce6e"
+    },
+    {
+      "api_id": 30548968,
+      "api_hash": "bbe4acf228f7d9d363acb897c4737dd9"
+    }
+  ],
+  "total": 20,
+  "description": "Telegram API IDs for rate limit distribution",
+  "assignment": "Each Bot is assigned an API by: api_index = (bot_number - 1) % total_apis"
+}
