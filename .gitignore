@@ -1,6 +1,5 @@
 __pycache__/
 *.pyc
-data/bots_config.json
 data/photos/
 data/*.jpg
 data/backups/
