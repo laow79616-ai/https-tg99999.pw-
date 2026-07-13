@@ -2572,7 +2572,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.692714"
+      "added_at": "2026-06-29T08:27:41.692714",
+      "profile_set": true
     },
     "bot_161": {
       "number": 161,
@@ -2584,7 +2585,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.692862"
+      "added_at": "2026-06-29T08:27:41.692862",
+      "profile_set": true
     },
     "bot_162": {
       "number": 162,
@@ -2596,7 +2598,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.693057"
+      "added_at": "2026-06-29T08:27:41.693057",
+      "profile_set": true
     },
     "bot_163": {
       "number": 163,
@@ -2608,7 +2611,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.693197"
+      "added_at": "2026-06-29T08:27:41.693197",
+      "profile_set": true
     },
     "bot_164": {
       "number": 164,
@@ -2620,7 +2624,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.693413"
+      "added_at": "2026-06-29T08:27:41.693413",
+      "profile_set": true
     },
     "bot_165": {
       "number": 165,
@@ -2632,7 +2637,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.693519"
+      "added_at": "2026-06-29T08:27:41.693519",
+      "profile_set": true
     },
     "bot_166": {
       "number": 166,
@@ -2644,7 +2650,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.693653"
+      "added_at": "2026-06-29T08:27:41.693653",
+      "profile_set": true
     },
     "bot_167": {
       "number": 167,
@@ -2656,7 +2663,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.693794"
+      "added_at": "2026-06-29T08:27:41.693794",
+      "profile_set": true
     },
     "bot_168": {
       "number": 168,
@@ -2668,7 +2676,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.693950"
+      "added_at": "2026-06-29T08:27:41.693950",
+      "profile_set": true
     },
     "bot_169": {
       "number": 169,
@@ -2680,7 +2689,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.694109"
+      "added_at": "2026-06-29T08:27:41.694109",
+      "profile_set": true
     },
     "bot_170": {
       "number": 170,
@@ -2692,7 +2702,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.694265"
+      "added_at": "2026-06-29T08:27:41.694265",
+      "profile_set": true
     },
     "bot_171": {
       "number": 171,
@@ -2704,7 +2715,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.694376"
+      "added_at": "2026-06-29T08:27:41.694376",
+      "profile_set": true
     },
     "bot_172": {
       "number": 172,
@@ -2716,7 +2728,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.694533"
+      "added_at": "2026-06-29T08:27:41.694533",
+      "profile_set": true
     },
     "bot_173": {
       "number": 173,
@@ -2728,7 +2741,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.694698"
+      "added_at": "2026-06-29T08:27:41.694698",
+      "profile_set": true
     },
     "bot_174": {
       "number": 174,
@@ -2740,7 +2754,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.694839"
+      "added_at": "2026-06-29T08:27:41.694839",
+      "profile_set": true
     },
     "bot_175": {
       "number": 175,
@@ -2752,7 +2767,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.694982"
+      "added_at": "2026-06-29T08:27:41.694982",
+      "profile_set": true
     },
     "bot_176": {
       "number": 176,
@@ -2764,7 +2780,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.695124"
+      "added_at": "2026-06-29T08:27:41.695124",
+      "profile_set": true
     },
     "bot_177": {
       "number": 177,
@@ -2776,7 +2793,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.695264"
+      "added_at": "2026-06-29T08:27:41.695264",
+      "profile_set": true
     },
     "bot_178": {
       "number": 178,
@@ -2788,7 +2806,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.695403"
+      "added_at": "2026-06-29T08:27:41.695403",
+      "profile_set": true
     },
     "bot_179": {
       "number": 179,
@@ -2800,7 +2819,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.695540"
+      "added_at": "2026-06-29T08:27:41.695540",
+      "profile_set": true
     },
     "bot_180": {
       "number": 180,
@@ -2812,7 +2832,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.695678"
+      "added_at": "2026-06-29T08:27:41.695678",
+      "profile_set": true
     },
     "bot_181": {
       "number": 181,
@@ -2824,7 +2845,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.695815"
+      "added_at": "2026-06-29T08:27:41.695815",
+      "profile_set": true
     },
     "bot_182": {
       "number": 182,
@@ -2836,7 +2858,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.695972"
+      "added_at": "2026-06-29T08:27:41.695972",
+      "profile_set": true
     },
     "bot_183": {
       "number": 183,
@@ -2848,7 +2871,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.696116"
+      "added_at": "2026-06-29T08:27:41.696116",
+      "profile_set": true
     },
     "bot_184": {
       "number": 184,
@@ -2860,7 +2884,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.696288"
+      "added_at": "2026-06-29T08:27:41.696288",
+      "profile_set": true
     },
     "bot_185": {
       "number": 185,
@@ -2872,7 +2897,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.696431"
+      "added_at": "2026-06-29T08:27:41.696431",
+      "profile_set": true
     },
     "bot_186": {
       "number": 186,
@@ -2884,7 +2910,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.696572"
+      "added_at": "2026-06-29T08:27:41.696572",
+      "profile_set": true
     },
     "bot_187": {
       "number": 187,
@@ -2896,7 +2923,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.696714"
+      "added_at": "2026-06-29T08:27:41.696714",
+      "profile_set": true
     },
     "bot_188": {
       "number": 188,
@@ -2908,7 +2936,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.696859"
+      "added_at": "2026-06-29T08:27:41.696859",
+      "profile_set": true
     },
     "bot_189": {
       "number": 189,
@@ -2920,7 +2949,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.697018"
+      "added_at": "2026-06-29T08:27:41.697018",
+      "profile_set": true
     },
     "bot_190": {
       "number": 190,
@@ -2932,7 +2962,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.697102"
+      "added_at": "2026-06-29T08:27:41.697102",
+      "profile_set": true
     },
     "bot_191": {
       "number": 191,
@@ -2944,7 +2975,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.697261"
+      "added_at": "2026-06-29T08:27:41.697261",
+      "profile_set": true
     },
     "bot_192": {
       "number": 192,
@@ -2956,7 +2988,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.697453"
+      "added_at": "2026-06-29T08:27:41.697453",
+      "profile_set": true
     },
     "bot_193": {
       "number": 193,
@@ -2968,7 +3001,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.697608"
+      "added_at": "2026-06-29T08:27:41.697608",
+      "profile_set": true
     },
     "bot_194": {
       "number": 194,
@@ -2980,7 +3014,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.697756"
+      "added_at": "2026-06-29T08:27:41.697756",
+      "profile_set": true
     },
     "bot_195": {
       "number": 195,
@@ -2992,7 +3027,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.697913"
+      "added_at": "2026-06-29T08:27:41.697913",
+      "profile_set": true
     },
     "bot_196": {
       "number": 196,
@@ -3004,7 +3040,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.701084"
+      "added_at": "2026-06-29T08:27:41.701084",
+      "profile_set": true
     },
     "bot_197": {
       "number": 197,
@@ -3016,7 +3053,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.701329"
+      "added_at": "2026-06-29T08:27:41.701329",
+      "profile_set": true
     },
     "bot_198": {
       "number": 198,
@@ -3028,7 +3066,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.701418"
+      "added_at": "2026-06-29T08:27:41.701418",
+      "profile_set": true
     },
     "bot_199": {
       "number": 199,
@@ -3040,7 +3079,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.701499"
+      "added_at": "2026-06-29T08:27:41.701499",
+      "profile_set": true
     },
     "bot_200": {
       "number": 200,
@@ -3052,7 +3092,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.701578"
+      "added_at": "2026-06-29T08:27:41.701578",
+      "profile_set": true
     },
     "bot_201": {
       "number": 201,
@@ -3064,7 +3105,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.701652"
+      "added_at": "2026-06-29T08:27:41.701652",
+      "profile_set": true
     },
     "bot_202": {
       "number": 202,
@@ -3076,7 +3118,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.701755"
+      "added_at": "2026-06-29T08:27:41.701755",
+      "profile_set": true
     },
     "bot_203": {
       "number": 203,
@@ -3088,7 +3131,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.701922"
+      "added_at": "2026-06-29T08:27:41.701922",
+      "profile_set": true
     },
     "bot_204": {
       "number": 204,
@@ -3100,7 +3144,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.702028"
+      "added_at": "2026-06-29T08:27:41.702028",
+      "profile_set": true
     },
     "bot_205": {
       "number": 205,
@@ -3112,7 +3157,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.702137"
+      "added_at": "2026-06-29T08:27:41.702137",
+      "profile_set": true
     },
     "bot_206": {
       "number": 206,
@@ -3124,7 +3170,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.702298"
+      "added_at": "2026-06-29T08:27:41.702298",
+      "profile_set": true
     },
     "bot_207": {
       "number": 207,
@@ -3136,7 +3183,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.702477"
+      "added_at": "2026-06-29T08:27:41.702477",
+      "profile_set": true
     },
     "bot_208": {
       "number": 208,
@@ -3148,7 +3196,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.702632"
+      "added_at": "2026-06-29T08:27:41.702632",
+      "profile_set": true
     },
     "bot_209": {
       "number": 209,
@@ -3160,7 +3209,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.702785"
+      "added_at": "2026-06-29T08:27:41.702785",
+      "profile_set": true
     },
     "bot_210": {
       "number": 210,
@@ -3172,7 +3222,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.702955"
+      "added_at": "2026-06-29T08:27:41.702955",
+      "profile_set": true
     },
     "bot_211": {
       "number": 211,
@@ -3184,7 +3235,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.703146"
+      "added_at": "2026-06-29T08:27:41.703146",
+      "profile_set": true
     },
     "bot_212": {
       "number": 212,
@@ -3196,7 +3248,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.703335"
+      "added_at": "2026-06-29T08:27:41.703335",
+      "profile_set": true
     },
     "bot_213": {
       "number": 213,
@@ -3208,7 +3261,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.703528"
+      "added_at": "2026-06-29T08:27:41.703528",
+      "profile_set": true
     },
     "bot_214": {
       "number": 214,
@@ -3220,7 +3274,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.703688"
+      "added_at": "2026-06-29T08:27:41.703688",
+      "profile_set": true
     },
     "bot_215": {
       "number": 215,
@@ -3232,7 +3287,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.703845"
+      "added_at": "2026-06-29T08:27:41.703845",
+      "profile_set": true
     },
     "bot_216": {
       "number": 216,
@@ -3244,7 +3300,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.704018"
+      "added_at": "2026-06-29T08:27:41.704018",
+      "profile_set": true
     },
     "bot_217": {
       "number": 217,
@@ -3256,7 +3313,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.704181"
+      "added_at": "2026-06-29T08:27:41.704181",
+      "profile_set": true
     },
     "bot_218": {
       "number": 218,
@@ -3268,7 +3326,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.704304"
+      "added_at": "2026-06-29T08:27:41.704304",
+      "profile_set": true
     },
     "bot_219": {
       "number": 219,
@@ -3280,7 +3339,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.704425"
+      "added_at": "2026-06-29T08:27:41.704425",
+      "profile_set": true
     },
     "bot_220": {
       "number": 220,
@@ -3292,7 +3352,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.704592"
+      "added_at": "2026-06-29T08:27:41.704592",
+      "profile_set": true
     },
     "bot_221": {
       "number": 221,
@@ -3304,7 +3365,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.704760"
+      "added_at": "2026-06-29T08:27:41.704760",
+      "profile_set": true
     },
     "bot_222": {
       "number": 222,
@@ -3316,7 +3378,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.704933"
+      "added_at": "2026-06-29T08:27:41.704933",
+      "profile_set": true
     },
     "bot_223": {
       "number": 223,
@@ -3328,7 +3391,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.705096"
+      "added_at": "2026-06-29T08:27:41.705096",
+      "profile_set": true
     },
     "bot_224": {
       "number": 224,
@@ -3340,7 +3404,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.705315"
+      "added_at": "2026-06-29T08:27:41.705315",
+      "profile_set": true
     },
     "bot_225": {
       "number": 225,
@@ -3417,7 +3482,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.706353"
+      "added_at": "2026-06-29T08:27:41.706353",
+      "profile_set": true
     },
     "bot_231": {
       "number": 231,
@@ -3429,7 +3495,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.706524"
+      "added_at": "2026-06-29T08:27:41.706524",
+      "profile_set": true
     },
     "bot_232": {
       "number": 232,
@@ -3441,7 +3508,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.706685"
+      "added_at": "2026-06-29T08:27:41.706685",
+      "profile_set": true
     },
     "bot_233": {
       "number": 233,
@@ -3453,7 +3521,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.706850"
+      "added_at": "2026-06-29T08:27:41.706850",
+      "profile_set": true
     },
     "bot_234": {
       "number": 234,
@@ -3465,7 +3534,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.707030"
+      "added_at": "2026-06-29T08:27:41.707030",
+      "profile_set": true
     },
     "bot_235": {
       "number": 235,
@@ -3477,7 +3547,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.707197"
+      "added_at": "2026-06-29T08:27:41.707197",
+      "profile_set": true
     },
     "bot_236": {
       "number": 236,
@@ -3489,7 +3560,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.707369"
+      "added_at": "2026-06-29T08:27:41.707369",
+      "profile_set": true
     },
     "bot_237": {
       "number": 237,
@@ -3501,7 +3573,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.707540"
+      "added_at": "2026-06-29T08:27:41.707540",
+      "profile_set": true
     },
     "bot_238": {
       "number": 238,
@@ -3513,7 +3586,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.707709"
+      "added_at": "2026-06-29T08:27:41.707709",
+      "profile_set": true
     },
     "bot_239": {
       "number": 239,
@@ -3525,7 +3599,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.707882"
+      "added_at": "2026-06-29T08:27:41.707882",
+      "profile_set": true
     },
     "bot_240": {
       "number": 240,
@@ -3537,7 +3612,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.708070"
+      "added_at": "2026-06-29T08:27:41.708070",
+      "profile_set": true
     },
     "bot_241": {
       "number": 241,
@@ -3549,7 +3625,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.708251"
+      "added_at": "2026-06-29T08:27:41.708251",
+      "profile_set": true
     },
     "bot_242": {
       "number": 242,
@@ -3561,7 +3638,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.708400"
+      "added_at": "2026-06-29T08:27:41.708400",
+      "profile_set": true
     },
     "bot_243": {
       "number": 243,
@@ -3573,7 +3651,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.708602"
+      "added_at": "2026-06-29T08:27:41.708602",
+      "profile_set": true
     },
     "bot_244": {
       "number": 244,
@@ -3585,7 +3664,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.708727"
+      "added_at": "2026-06-29T08:27:41.708727",
+      "profile_set": true
     },
     "bot_245": {
       "number": 245,
@@ -3597,7 +3677,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.708846"
+      "added_at": "2026-06-29T08:27:41.708846",
+      "profile_set": true
     },
     "bot_246": {
       "number": 246,
@@ -3609,7 +3690,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.709280"
+      "added_at": "2026-06-29T08:27:41.709280",
+      "profile_set": true
     },
     "bot_247": {
       "number": 247,
@@ -3621,7 +3703,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.709465"
+      "added_at": "2026-06-29T08:27:41.709465",
+      "profile_set": true
     },
     "bot_248": {
       "number": 248,
@@ -3633,7 +3716,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.709641"
+      "added_at": "2026-06-29T08:27:41.709641",
+      "profile_set": true
     },
     "bot_249": {
       "number": 249,
@@ -3645,7 +3729,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.709792"
+      "added_at": "2026-06-29T08:27:41.709792",
+      "profile_set": true
     },
     "bot_250": {
       "number": 250,
@@ -3657,7 +3742,8 @@
       "sent": 0,
       "success": 0,
       "failed": 0,
-      "added_at": "2026-06-29T08:27:41.709981"
+      "added_at": "2026-06-29T08:27:41.709981",
+      "profile_set": true
     },
     "bot_251": {
       "number": 251,
@@ -3920,5 +4006,5 @@
       "profile_set": true
     }
   },
-  "saved_at": "2026-07-11T04:10:43.038242"
+  "saved_at": "2026-07-11T04:25:01.705423"
 }
