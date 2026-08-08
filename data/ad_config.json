@@ -1,25 +1,32 @@
 {
-  "name": "default_ad",
-  "text": "✨ 欢迎光临快约到家 ✨\n\n🇲🇾 马来西亚专业上门服务\n✅ 正规按摩 · 安全放心\n✅ 美女技师 · 服务专业\n✅ 全城覆盖 · 快速上门\n\n📱 官网: www.kuaiyue.vip\n📢 频道: @kuaiyue9\n💬 咨询: @kuaiyue123456789",
-  "photo": "/root/bot_panel/data/photos/ad_image.png",
-  "buttons": [
-    [
-      {
-        "text": "🌐 访问官网",
-        "url": "https://www.kuaiyue.vip"
-      }
-    ],
-    [
-      {
-        "text": "📢 加入频道",
-        "url": "https://t.me/kuaiyue9"
-      }
-    ],
-    [
-      {
-        "text": "💬 在线咨询",
-        "url": "https://t.me/kuaiyue123456789"
-      }
+  "version": 2,
+  "default": {
+    "name": "panel_ad",
+    "title": "",
+    "text": "✨ 欢迎光临快约到家 ✨\n\n🇲🇾 马来西亚专业上门服务\n✅ 正规按摩 · 安全放心\n✅ 美女技师 · 服务专业\n✅ 全城覆盖 · 快速上门\n\n📱 官网: www.kuaiyue.vip\n📢 频道: @kuaiyue9\n💬 咨询: @kuaiyue123456789",
+    "photo": "/root/bot_panel/data/photos/ad_image.png",
+    "video": "",
+    "buttons": [
+      [
+        {
+          "text": "🌐 访问官网",
+          "url": "https://www.kuaiyue.vip"
+        }
+      ],
+      [
+        {
+          "text": "📢 加入频道",
+          "url": "https://t.me/kuaiyue9"
+        }
+      ],
+      [
+        {
+          "text": "💬 在线咨询",
+          "url": "https://t.me/kuaiyue123456789"
+        }
+      ]
     ]
-  ]
+  },
+  "by_line": {},
+  "updated_at": "2026-08-08T05:14:10.151211"
 }

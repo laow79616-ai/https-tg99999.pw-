@@ -12,6 +12,8 @@ import hashlib
 import logging
 from datetime import datetime, date
 from aiohttp import web
+import ad_mod
+import proxy_pool_mod
 
 # 配置
 CONFIG_FILE = '/root/bot_panel/data/bots_config.json'
@@ -90,21 +92,20 @@ def get_api_for_number(number):
     idx = (number - 1) % len(API_POOL)
     return API_POOL[idx]
 
+
 def get_proxy_for_number(number):
-    """根据Bot编号获取代理URL"""
-    for line_id, info in PROXY_LINES.items():
-        start, end = info['range']
-        if start <= number <= end:
-            return info['proxy']
-    return PROXY_LINES[1]['proxy']
+    """根据Bot编号获取代理URL（读 IP 池）"""
+    p = proxy_pool_mod.get_proxy_for_number(PROXY_LINES, number)
+    if p:
+        return p
+    if PROXY_LINES:
+        return next(iter(PROXY_LINES.values()))["proxy"]
+    return None
 
 def get_line_for_number(number):
-    """根据Bot编号获取线路号"""
-    for line_id, info in PROXY_LINES.items():
-        start, end = info['range']
-        if start <= number <= end:
-            return line_id
-    return 1
+    """根据Bot编号获取线路号（读 IP 池）"""
+    return proxy_pool_mod.get_line_for_number(PROXY_LINES, number)
+
 
 def get_webhook_secret(token):
     """根据Bot token生成唯一的webhook路径密钥"""
@@ -121,6 +122,7 @@ class BotEngine:
             "last_date": str(date.today())
         }
         self.ad_config = {}
+        self.ad_store = {}
         self.running = False
         self.webhook_registered = {}  # bot_id -> True/False
         self.last_check_result = None
@@ -129,6 +131,7 @@ class BotEngine:
         self.token_to_bot_id = {}
         # webhook_secret -> bot_id 快速查找映射
         self.secret_to_bot_id = {}
+        proxy_pool_mod.load_into(PROXY_LINES, logger=logger)
         self.load_config()
         self.load_stats()
         self.load_ad_config()
@@ -186,30 +189,21 @@ class BotEngine:
         with open(STATS_FILE, 'w') as f:
             json.dump(self.stats, f)
 
+
     def load_ad_config(self):
-        if os.path.exists(AD_CONFIG_FILE):
-            try:
-                with open(AD_CONFIG_FILE, 'r') as f:
-                    raw = json.load(f)
-                if 'ads' in raw and isinstance(raw['ads'], list) and raw['ads']:
-                    active_ad = None
-                    for ad in raw['ads']:
-                        if ad.get('active', True):
-                            active_ad = ad
-                            break
-                    if not active_ad:
-                        active_ad = raw['ads'][0]
-                    self.ad_config = {
-                        'name': active_ad.get('name', ''),
-                        'text': active_ad.get('caption', active_ad.get('text', '')),
-                        'buttons': active_ad.get('buttons', []),
-                        'image': active_ad.get('image', '')
-                    }
-                else:
-                    self.ad_config = raw
-                logger.info(f"加载广告配置: {self.ad_config.get('name', '')}, 文案长度: {len(self.ad_config.get('text', ''))}, 按钮数: {len(self.ad_config.get('buttons', []))}")
-            except Exception as e:
-                logger.error(f"加载广告配置失败: {e}")
+        """加载广告：支持全局 default + 按线路 by_line（兼容旧配置）"""
+        try:
+            self.ad_store = ad_mod.load_store(AD_CONFIG_FILE)
+            self.ad_config = ad_mod.normalize_ad(self.ad_store.get("default") or {})
+            logger.info(
+                "加载广告配置: default=%s text_len=%s lines=%s",
+                self.ad_config.get("name", ""),
+                len(self.ad_config.get("text") or ""),
+                len(self.ad_store.get("by_line") or {}),
+            )
+        except Exception as e:
+            logger.error(f"加载广告配置失败: {e}")
+
 
     def reset_today_stats(self):
         today = str(date.today())
@@ -221,14 +215,36 @@ class BotEngine:
             self.save_stats()
 
     async def get_client(self, proxy_url, bot_id=None):
-        """获取或创建httpx客户端（按代理线路共享）"""
+        """获取或创建httpx客户端（按代理线路共享，代理失败回退直连）"""
+        if not proxy_url:
+            proxy_url = '_direct_'
         if proxy_url not in self.clients:
-            self.clients[proxy_url] = httpx.AsyncClient(
-                proxy=proxy_url,
-                timeout=httpx.Timeout(30.0, connect=10.0),
-                limits=httpx.Limits(max_connections=50, max_keepalive_connections=10),
-                http2=False
-            )
+            # 先测试代理是否可用
+            try:
+                test_client = httpx.AsyncClient(
+                    proxy=proxy_url,
+                    timeout=httpx.Timeout(5.0, connect=3.0),
+                    http2=False
+                )
+                await test_client.get("https://api.telegram.org")
+                await test_client.aclose()
+                # 代理可用
+                self.clients[proxy_url] = httpx.AsyncClient(
+                    proxy=proxy_url,
+                    timeout=httpx.Timeout(30.0, connect=10.0),
+                    limits=httpx.Limits(max_connections=50, max_keepalive_connections=10),
+                    http2=False
+                )
+            except:
+                # 代理不可用，使用直连
+                if '_direct_' not in self.clients:
+                    self.clients['_direct_'] = httpx.AsyncClient(
+                        timeout=httpx.Timeout(30.0, connect=10.0),
+                        limits=httpx.Limits(max_connections=100, max_keepalive_connections=20),
+                        http2=False
+                    )
+                    logger.warning("代理不可用，已切换为直连模式")
+                self.clients[proxy_url] = self.clients['_direct_']
         return self.clients[proxy_url]
 
     # ==================== Webhook核心逻辑 ====================
@@ -268,19 +284,19 @@ class BotEngine:
                 callback = update.get('callback_query', {})
                 if callback:
                     chat_id = callback.get('message', {}).get('chat', {}).get('id')
-                    await self.send_ad_to_chat(token, proxy_url, chat_id)
+                    await self.send_ad_to_chat(token, proxy_url, chat_id, line_id=get_line_for_number(number))
                 return
 
             if text == '/start':
                 logger.info(f"Bot #{number} 收到 /start 来自 {chat_id}")
                 await self.send_welcome(token, proxy_url, chat_id, number)
             elif text == '/ad' or text == '预览消息':
-                await self.send_ad_to_chat(token, proxy_url, chat_id)
+                await self.send_ad_to_chat(token, proxy_url, chat_id, line_id=get_line_for_number(number))
             elif text == '/help':
                 await self.send_help(token, proxy_url, chat_id)
             else:
                 # 任何其他消息也发送广告
-                await self.send_ad_to_chat(token, proxy_url, chat_id)
+                await self.send_ad_to_chat(token, proxy_url, chat_id, line_id=get_line_for_number(number))
 
         except Exception as e:
             logger.error(f"Bot #{number} 处理消息错误: {e}")
@@ -303,11 +319,11 @@ class BotEngine:
             await client.post(url, json=payload)
 
             await asyncio.sleep(0.3)
-            await self.send_ad_to_chat(token, proxy_url, chat_id)
+            await self.send_ad_to_chat(token, proxy_url, chat_id, line_id=get_line_for_number(bot_number))
         except Exception as e:
             logger.error(f"发送欢迎消息失败: {e}")
 
-    async def send_ad_to_chat(self, token, proxy_url, chat_id):
+    async def send_ad_to_chat(self, token, proxy_url, chat_id, line_id=None):
         """发送广告到指定聊天"""
         if not self.ad_config or not self.ad_config.get('text'):
             await self.reload_ad_config()
@@ -330,8 +346,12 @@ class BotEngine:
 
         try:
             client = await self.get_client(proxy_url)
-            caption = self.ad_config.get('text', '')
-            buttons = self.ad_config.get('buttons', [])
+            store = getattr(self, 'ad_store', None) or ad_mod.load_store(AD_CONFIG_FILE)
+            ad = ad_mod.get_ad_for_line(store, line_id)
+            caption = ad_mod.caption_of(ad) or (self.ad_config.get('text') or '')
+            buttons = ad.get('buttons') or self.ad_config.get('buttons', [])
+            photo_path = ad_mod.resolve_media_path(ad.get('photo') or '')
+            video_path = ad_mod.resolve_media_path(ad.get('video') or '')
 
             inline_keyboard = []
             for btn in buttons:
@@ -340,7 +360,25 @@ class BotEngine:
                 elif isinstance(btn, dict):
                     inline_keyboard.append([{"text": btn['text'], "url": btn['url']}])
 
-            if os.path.exists(AD_IMAGE_FILE):
+            if video_path and os.path.exists(video_path):
+                url = f"https://api.telegram.org/bot{token}/sendVideo"
+                with open(video_path, 'rb') as vf:
+                    files = {'video': (os.path.basename(video_path), vf)}
+                    data = {'chat_id': str(chat_id), 'caption': caption}
+                    if inline_keyboard:
+                        data['reply_markup'] = json.dumps({"inline_keyboard": inline_keyboard})
+                    resp = await client.post(url, data=data, files=files)
+                    result = resp.json()
+            elif photo_path and os.path.exists(photo_path):
+                url = f"https://api.telegram.org/bot{token}/sendPhoto"
+                with open(photo_path, 'rb') as img:
+                    files = {'photo': (os.path.basename(photo_path), img)}
+                    data = {'chat_id': str(chat_id), 'caption': caption}
+                    if inline_keyboard:
+                        data['reply_markup'] = json.dumps({"inline_keyboard": inline_keyboard})
+                    resp = await client.post(url, data=data, files=files)
+                    result = resp.json()
+            elif os.path.exists(AD_IMAGE_FILE):
                 url = f"https://api.telegram.org/bot{token}/sendPhoto"
                 with open(AD_IMAGE_FILE, 'rb') as img:
                     files = {'photo': ('ad.jpg', img, 'image/jpeg')}
@@ -403,13 +441,14 @@ class BotEngine:
     # ==================== Webhook注册管理 ====================
 
     async def register_webhook(self, bot_id):
+        # REGISTER_WEBHOOK_DIRECT: setWebhook 走直连，避免失效代理导致全失败
         """为单个Bot注册Webhook"""
         bot = self.bots.get(bot_id)
         if not bot:
             return False
         token = bot['token']
         number = bot['number']
-        proxy_url = get_proxy_for_number(number)
+        proxy_url = None  # setWebhook 直连
         secret = get_webhook_secret(token)
         webhook_url = f"{WEBHOOK_DOMAIN}/webhook/{secret}"
 
@@ -490,6 +529,94 @@ class BotEngine:
             await asyncio.sleep(0.2)
 
     # ==================== 面板API接口（保持兼容） ====================
+
+
+    async def handle_proxy_pool(self, request):
+        items = proxy_pool_mod.list_lines(PROXY_LINES, self.bots)
+        return web.json_response({"ok": True, "total": len(items), "lines": items})
+
+    async def handle_proxy_batch_add(self, request):
+        data = await request.json()
+        text = data.get("proxies_text") or ""
+        if not text and isinstance(data.get("proxies"), list):
+            text = chr(10).join(data["proxies"])
+        result = proxy_pool_mod.batch_add(PROXY_LINES, text, data.get("default_auth", ""))
+        status = 200 if result.get("ok") else 400
+        return web.json_response(result, status=status)
+
+    async def handle_proxy_redistribute(self, request):
+        try:
+            data = await request.json()
+        except Exception:
+            data = {}
+        max_bots = int(data.get("max_bots") or 0)
+        result = proxy_pool_mod.redistribute(PROXY_LINES, self.bots, max_bots=max_bots)
+        if result.get("ok"):
+            self.save_config()
+            # 清理不再使用的代理 httpx 客户端（不影响 webhook 入站）
+            try:
+                live = {info["proxy"] for info in PROXY_LINES.values() if info.get("enabled", True)}
+                dead = [u for u in list(self.clients.keys()) if u not in live and u != "_direct_"]
+                for u in dead:
+                    c = self.clients.pop(u, None)
+                    if c:
+                        import asyncio as _asyncio
+                        _asyncio.create_task(c.aclose())
+            except Exception as e:
+                logger.warning("清理 proxy 客户端: %s", e)
+        status = 200 if result.get("ok") else 400
+        return web.json_response(result, status=status)
+
+
+    
+    async def handle_ad_get(self, request):
+        store = ad_mod.load_store(AD_CONFIG_FILE)
+        self.ad_store = store
+        return web.json_response(ad_mod.list_summary(store))
+
+    async def handle_ad_save(self, request):
+        data = await request.json()
+        ad = data.get("ad") or data
+        as_default = bool(data.get("as_default", True))
+        line_ids = data.get("line_ids") or data.get("lines") or []
+        line_ids = [int(x) for x in line_ids]
+        store = ad_mod.load_store(AD_CONFIG_FILE)
+        result = ad_mod.save_ad(store, ad, as_default=as_default, line_ids=line_ids or None)
+        self.ad_store = ad_mod.load_store(AD_CONFIG_FILE)
+        self.ad_config = ad_mod.normalize_ad(self.ad_store.get("default") or {})
+        return web.json_response(result)
+
+    async def handle_ad_clear_lines(self, request):
+        data = await request.json()
+        line_ids = [int(x) for x in (data.get("line_ids") or [])]
+        store = ad_mod.load_store(AD_CONFIG_FILE)
+        result = ad_mod.clear_line_ads(store, line_ids)
+        self.ad_store = ad_mod.load_store(AD_CONFIG_FILE)
+        return web.json_response(result)
+
+    async def handle_ad_upload(self, request):
+        """上传广告图片/视频到 data/ad_media/"""
+        reader = await request.multipart()
+        field = await reader.next()
+        if field is None:
+            return web.json_response({"ok": False, "error": "no file"}, status=400)
+        filename = field.filename or "upload.bin"
+        ext = os.path.splitext(filename)[1].lower() or ".bin"
+        os.makedirs(ad_mod.AD_MEDIA_DIR, exist_ok=True)
+        ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+        safe = f"ad_{ts}{ext}"
+        dest = os.path.join(ad_mod.AD_MEDIA_DIR, safe)
+        size = 0
+        with open(dest, "wb") as f:
+            while True:
+                chunk = await field.read_chunk()
+                if not chunk:
+                    break
+                size += len(chunk)
+                f.write(chunk)
+        kind = "video" if ext in (".mp4", ".mov", ".webm") else "photo"
+        return web.json_response({"ok": True, "path": dest, "kind": kind, "size": size, "name": safe})
+
 
     async def handle_status(self, request):
         """返回所有Bot状态（含线路分组）"""
@@ -1004,12 +1131,12 @@ class BotEngine:
     async def reload_ad_config(self):
         """重新加载广告配置"""
         try:
-            if os.path.exists(AD_CONFIG_FILE):
-                with open(AD_CONFIG_FILE) as f:
-                    self.ad_config = json.load(f)
-                logger.info("广告配置已重新加载")
+            self.ad_store = ad_mod.load_store(AD_CONFIG_FILE)
+            self.ad_config = ad_mod.normalize_ad(self.ad_store.get("default") or {})
+            logger.info("广告配置已重新加载")
         except Exception as e:
             logger.error(f"重新加载广告配置失败: {e}")
+
 
     async def handle_check_result(self, request):
         """获取最近一次检测结果"""
@@ -1058,6 +1185,13 @@ async def main():
 
     # 面板API端点（保持兼容）
     app.router.add_get('/status', engine.handle_status)
+    app.router.add_get('/ad', engine.handle_ad_get)
+    app.router.add_post('/ad/save', engine.handle_ad_save)
+    app.router.add_post('/ad/clear_lines', engine.handle_ad_clear_lines)
+    app.router.add_post('/ad/upload', engine.handle_ad_upload)
+    app.router.add_get('/proxy_pool', engine.handle_proxy_pool)
+    app.router.add_post('/proxy_pool/batch_add', engine.handle_proxy_batch_add)
+    app.router.add_post('/proxy_pool/redistribute', engine.handle_proxy_redistribute)
     app.router.add_post('/add_bot', engine.handle_add_bot)
     app.router.add_post('/batch_add', engine.handle_batch_add)
     app.router.add_post('/remove_bot', engine.handle_remove_bot)

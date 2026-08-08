@@ -113,11 +113,66 @@
         </div>
     </div>
 
+    
     <div class="lines-section">
-        <h3>线路分配规则（添加Bot时自动按编号分配代理IP）</h3>
+        <h3 style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+            <span>代理IP池 / 线路</span>
+            <span>
+                <button class="btn btn-batch" onclick="showProxyAddModal()">批量添加IP</button>
+                <button class="btn btn-check" onclick="redistributeProxies()">一键均匀分配</button>
+                <button class="btn btn-refresh" onclick="refreshStatus()">刷新</button>
+            </span>
+        </h3>
         <div class="lines-grid" id="lines-display"></div>
     </div>
+    <div id="proxy-add-modal" class="modal" style="display:none;align-items:center;justify-content:center">
+        <div class="modal-content" style="max-width:520px">
+            <h3 style="color:#00d4ff;margin-bottom:12px">批量添加代理IP</h3>
+            <p style="color:#8899aa;font-size:12px;margin-bottom:8px">每行一条。只追加新线路，不改已有Bot的IP。</p>
+            <textarea id="proxy-batch-text" rows="8" style="width:100%;padding:10px;background:#1a2332;border:1px solid #2c3e50;color:#fff;border-radius:4px" placeholder="socks5://user:pass@1.2.3.4:9270"></textarea>
+            <div style="margin:10px 0">
+                <label style="color:#aaa;font-size:12px">默认账号 user:pass（可选）</label>
+                <input id="proxy-default-auth" type="text" style="width:100%;padding:8px;background:#1a2332;border:1px solid #2c3e50;color:#fff;border-radius:4px">
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-refresh" onclick="document.getElementById('proxy-add-modal').style.display='none'">取消</button>
+                <button class="btn btn-add" onclick="submitProxyBatch()">确认添加</button>
+            </div>
+        </div>
+    </div>
 
+    
+    <div class="lines-section" id="ad-editor-section" style="margin-top:16px">
+        <h3 style="color:#00d4ff">广告编辑器（全局默认 / 按线路）</h3>
+        <p style="color:#8899aa;font-size:12px;margin-bottom:10px">改完保存即对所选线路生效；用户再互动会收到新广告。不删Bot、不重挂Webhook。</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <div>
+                <label style="color:#aaa;font-size:12px">标题</label>
+                <input id="ad-title" style="width:100%;padding:8px;background:#1a2332;border:1px solid #2c3e50;color:#fff;border-radius:4px;margin-bottom:8px">
+                <label style="color:#aaa;font-size:12px">文案</label>
+                <textarea id="ad-text" rows="8" style="width:100%;padding:8px;background:#1a2332;border:1px solid #2c3e50;color:#fff;border-radius:4px"></textarea>
+                <label style="color:#aaa;font-size:12px;display:block;margin-top:8px">按钮（每行：按钮文字 | https://链接）</label>
+                <textarea id="ad-buttons" rows="4" style="width:100%;padding:8px;background:#1a2332;border:1px solid #2c3e50;color:#fff;border-radius:4px" placeholder="访问官网 | https://www.kuaiyue.vip"></textarea>
+            </div>
+            <div>
+                <label style="color:#aaa;font-size:12px">图片路径（上传后自动填）</label>
+                <input id="ad-photo" style="width:100%;padding:8px;background:#1a2332;border:1px solid #2c3e50;color:#fff;border-radius:4px;margin-bottom:8px">
+                <input type="file" id="ad-photo-file" accept="image/*" style="color:#ccc;margin-bottom:8px">
+                <label style="color:#aaa;font-size:12px">视频路径（可选）</label>
+                <input id="ad-video" style="width:100%;padding:8px;background:#1a2332;border:1px solid #2c3e50;color:#fff;border-radius:4px;margin-bottom:8px">
+                <input type="file" id="ad-video-file" accept="video/*" style="color:#ccc;margin-bottom:8px">
+                <label style="color:#aaa;font-size:12px">应用到线路（多选，空=只改全局默认）</label>
+                <div id="ad-line-checks" style="max-height:120px;overflow:auto;background:#1a2332;padding:8px;border-radius:4px;margin-bottom:8px;color:#ddd;font-size:12px"></div>
+                <label style="color:#aaa;font-size:12px"><input type="checkbox" id="ad-as-default" checked> 同时设为全局默认</label>
+                <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+                    <button class="btn btn-add" onclick="saveAdConfig()">保存广告</button>
+                    <button class="btn btn-refresh" onclick="loadAdConfig()">刷新</button>
+                    <button class="btn btn-check" onclick="clearSelectedLineAds()">清除所选线路专属（回退默认）</button>
+                </div>
+                <div id="ad-save-msg" style="color:#8f8;font-size:12px;margin-top:8px"></div>
+            </div>
+        </div>
+    </div>
 
     <div class="check-section">
         <h3>水军自动检测（每小时自动检测Bot广告状态）
@@ -274,18 +329,18 @@
             const linesDiv = document.getElementById('lines-display');
             let linesHTML = '';
             const lines = data.lines || {};
-            for (let i = 1; i <= 10; i++) {
-                const line = lines[String(i)];
-                if (line) {
-                    linesHTML += `<div class="line-tag line-${i}">
-                        <span class="line-name">${i}号线</span>
-                        <span class="line-info">编号 ${line.range_start}-${line.range_end}</span>
-                        <span class="line-info">${line.proxy}</span>
-                        <span class="line-info">[${line.bot_count}/${line.max_bots}]</span>
-                    </div>`;
-                }
+            const ids = Object.keys(lines).map(Number).sort(function(a,b){return a-b;});
+            for (var _i=0; _i<ids.length; _i++) {
+                var i = ids[_i];
+                var line = lines[String(i)];
+                if (!line) continue;
+                linesHTML += '<div class="line-tag line-' + i + '">'
+                    + '<span class="line-name">' + i + '号线</span>'
+                    + '<span class="line-info">编号 ' + line.range_start + '-' + line.range_end + '</span>'
+                    + '<span class="line-info">' + line.proxy + '</span>'
+                    + '<span class="line-info">[' + line.bot_count + '/' + line.max_bots + ']</span></div>';
             }
-            linesDiv.innerHTML = linesHTML;
+            linesDiv.innerHTML = linesHTML || '<div style="color:#8899aa">暂无线路</div>';
 
             // 更新Bot列表
             allBots = [];
@@ -673,6 +728,152 @@
         refreshStatus();
         // 每30秒自动刷新
         setInterval(refreshStatus, 30000);
+    
+        function showProxyAddModal() {
+            var el = document.getElementById('proxy-add-modal');
+            if (el) el.style.display = 'flex';
+        }
+        async function submitProxyBatch() {
+            var textEl = document.getElementById('proxy-batch-text');
+            var authEl = document.getElementById('proxy-default-auth');
+            if (!textEl) { alert('页面缺少输入框'); return; }
+            var text = textEl.value.trim();
+            var default_auth = authEl ? authEl.value.trim() : '';
+            if (!text) { alert('请粘贴代理列表'); return; }
+            try {
+                var result = await fetchAPI((typeof API_BASE !== 'undefined' ? API_BASE : '') + '/api/proxy_pool/batch_add', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ proxies_text: text, default_auth: default_auth })
+                });
+                if (result.error || result.ok === false) {
+                    alert('添加失败: ' + (result.error || JSON.stringify(result)));
+                    return;
+                }
+                alert('已追加 ' + result.added + ' 条新线路（未改现有Bot IP）');
+                textEl.value = '';
+                var modal = document.getElementById('proxy-add-modal');
+                if (modal) modal.style.display = 'none';
+                refreshStatus();
+            } catch (e) {
+                alert('添加失败: ' + e.message);
+            }
+        }
+        async function redistributeProxies() {
+            if (!confirm('将按启用线路均匀重切编号，并更新每个Bot的line/proxy。\n不会删除Bot，不会重挂Webhook。\n确认？')) return;
+            try {
+                var result = await fetchAPI((typeof API_BASE !== 'undefined' ? API_BASE : '') + '/api/proxy_pool/redistribute', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({})
+                });
+                if (result.error || result.ok === false) {
+                    alert('分配失败: ' + (result.error || JSON.stringify(result)));
+                    return;
+                }
+                alert('完成：' + result.lines + ' 条线路，每线约 ' + result.cap_per_line + '，更新 ' + result.bots_updated + ' 个Bot');
+                refreshStatus();
+            } catch (e) {
+                alert('分配失败: ' + e.message);
+            }
+        }
+
+    
+        async function loadAdConfig() {
+            try {
+                var data = await fetchAPI((typeof API_BASE!=='undefined'?API_BASE:'') + '/api/ad');
+                if (data.error) { alert(data.error); return; }
+                var d = data.default || {};
+                document.getElementById('ad-title').value = d.title || '';
+                document.getElementById('ad-text').value = d.text || '';
+                document.getElementById('ad-photo').value = d.photo || '';
+                document.getElementById('ad-video').value = d.video || '';
+                var btns = d.buttons || [];
+                var lines = [];
+                btns.forEach(function(row) {
+                    (row || []).forEach(function(b) {
+                        lines.push((b.text || '') + ' | ' + (b.url || ''));
+                    });
+                });
+                document.getElementById('ad-buttons').value = lines.join('\n');
+                var box = document.getElementById('ad-line-checks');
+                if (box) {
+                    var html = '';
+                    for (var i = 1; i <= 30; i++) {
+                        var tag = (data.by_line && data.by_line[String(i)]) ? ' [有专属]' : '';
+                        html += '<label style="margin-right:10px;display:inline-block"><input type="checkbox" class="ad-line-cb" value="'+i+'"> '+i+'号线'+tag+'</label>';
+                    }
+                    box.innerHTML = html;
+                }
+            } catch (e) { console.log(e); }
+        }
+        function parseAdButtons() {
+            var text = document.getElementById('ad-buttons').value || '';
+            var rows = [];
+            text.split('\n').forEach(function(line) {
+                line = line.trim();
+                if (!line) return;
+                var parts = line.split('|');
+                if (parts.length < 2) return;
+                var t = parts[0].trim();
+                var u = parts.slice(1).join('|').trim();
+                if (t && u) rows.push([{text: t, url: u}]);
+            });
+            return rows;
+        }
+        async function uploadAdFile(inputId, targetId) {
+            var inp = document.getElementById(inputId);
+            if (!inp || !inp.files || !inp.files[0]) return;
+            var fd = new FormData();
+            fd.append('file', inp.files[0]);
+            var resp = await fetch((typeof API_BASE!=='undefined'?API_BASE:'') + '/api/ad/upload', { method: 'POST', body: fd, credentials: 'same-origin' });
+            var data = await resp.json();
+            if (data.path) document.getElementById(targetId).value = data.path;
+            else alert('上传失败: ' + (data.error || JSON.stringify(data)));
+        }
+        async function saveAdConfig() {
+            var line_ids = [];
+            document.querySelectorAll('.ad-line-cb:checked').forEach(function(cb){ line_ids.push(parseInt(cb.value,10)); });
+            var payload = {
+                as_default: document.getElementById('ad-as-default').checked,
+                line_ids: line_ids,
+                ad: {
+                    name: 'panel_ad',
+                    title: document.getElementById('ad-title').value.trim(),
+                    text: document.getElementById('ad-text').value,
+                    photo: document.getElementById('ad-photo').value.trim(),
+                    video: document.getElementById('ad-video').value.trim(),
+                    buttons: parseAdButtons()
+                }
+            };
+            try {
+                var result = await fetchAPI((typeof API_BASE!=='undefined'?API_BASE:'') + '/api/ad/save', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(payload)
+                });
+                document.getElementById('ad-save-msg').textContent = result.ok ? ('已保存 ' + (result.lines && result.lines.length ? ('线路 '+result.lines.join(',')) : '全局默认')) : JSON.stringify(result);
+                loadAdConfig();
+            } catch (e) { alert(e.message); }
+        }
+        async function clearSelectedLineAds() {
+            var line_ids = [];
+            document.querySelectorAll('.ad-line-cb:checked').forEach(function(cb){ line_ids.push(parseInt(cb.value,10)); });
+            if (!line_ids.length) { alert('请先勾选线路'); return; }
+            if (!confirm('清除线路专属广告，恢复用全局默认？')) return;
+            await fetchAPI((typeof API_BASE!=='undefined'?API_BASE:'') + '/api/ad/clear_lines', {
+                method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({line_ids: line_ids})
+            });
+            loadAdConfig();
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            var pf = document.getElementById('ad-photo-file');
+            var vf = document.getElementById('ad-video-file');
+            if (pf) pf.addEventListener('change', function(){ uploadAdFile('ad-photo-file', 'ad-photo'); });
+            if (vf) vf.addEventListener('change', function(){ uploadAdFile('ad-video-file', 'ad-video'); });
+            if (document.getElementById('ad-editor-section')) loadAdConfig();
+        });
+
     </script>
 </body>
 </html>

@@ -1,8 +1,14 @@
-__pycache__/
-*.pyc
+data/bots_config.json
+data/stats.json
+data/last_check.json
+data/proxy_pool.json
+data/ad_config.json
+data/ad_media/
 data/photos/
-data/*.jpg
 data/backups/
 logs/
 *.log
+__pycache__/
+backup_*/
+bak_*/
 .env

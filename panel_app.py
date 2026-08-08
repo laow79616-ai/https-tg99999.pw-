@@ -209,7 +209,10 @@ def get_engine_status():
 @app.route('/')
 @login_required
 def index():
-    return send_from_directory('/root/bot_panel/frontend', 'index.html')
+    resp = send_from_directory('/root/bot_panel/frontend', 'index.html')
+    resp.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, max-age=0'
+    resp.headers['Pragma'] = 'no-cache'
+    return resp
 
 
 # ============ API路由 ============
@@ -474,6 +477,88 @@ def api_manual_check():
     """手动触发一次Bot检测"""
     try:
         resp = requests.post(f"{ENGINE_URL}/manual_check", timeout=10)
+        return jsonify(resp.json())
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+@app.route('/api/proxy_pool/batch_add', methods=['POST'])
+@login_required
+def api_proxy_batch_add():
+    try:
+        data = request.get_json(force=True, silent=True) or {}
+        resp = requests.post(f"{ENGINE_URL}/proxy_pool/batch_add", json=data, timeout=30)
+        return jsonify(resp.json())
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+
+
+
+@app.route("/api/proxy_pool")
+@login_required
+def api_proxy_pool():
+    try:
+        resp = requests.get(f"{ENGINE_URL}/proxy_pool", timeout=ENGINE_TIMEOUT)
+        return jsonify(resp.json())
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+
+@app.route("/api/proxy_pool/redistribute", methods=["POST"])
+@login_required
+def api_proxy_redistribute():
+    try:
+        data = request.get_json(force=True, silent=True) or {}
+        resp = requests.post(f"{ENGINE_URL}/proxy_pool/redistribute", json=data, timeout=60)
+        return jsonify(resp.json())
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+
+
+@app.route("/api/ad")
+@login_required
+def api_ad_get():
+    try:
+        resp = requests.get(f"{ENGINE_URL}/ad", timeout=ENGINE_TIMEOUT)
+        return jsonify(resp.json())
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route("/api/ad/save", methods=["POST"])
+@login_required
+def api_ad_save():
+    try:
+        data = request.get_json(force=True, silent=True) or {}
+        resp = requests.post(f"{ENGINE_URL}/ad/save", json=data, timeout=30)
+        return jsonify(resp.json())
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route("/api/ad/clear_lines", methods=["POST"])
+@login_required
+def api_ad_clear_lines():
+    try:
+        data = request.get_json(force=True, silent=True) or {}
+        resp = requests.post(f"{ENGINE_URL}/ad/clear_lines", json=data, timeout=15)
+        return jsonify(resp.json())
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route("/api/ad/upload", methods=["POST"])
+@login_required
+def api_ad_upload():
+    try:
+        if "file" not in request.files and "photo" not in request.files:
+            return jsonify({"error": "no file"}), 400
+        f = request.files.get("file") or request.files.get("photo")
+        files = {"file": (f.filename, f.stream, f.mimetype or "application/octet-stream")}
+        resp = requests.post(f"{ENGINE_URL}/ad/upload", files=files, timeout=120)
         return jsonify(resp.json())
     except Exception as e:
         return jsonify({"error": str(e)}), 500

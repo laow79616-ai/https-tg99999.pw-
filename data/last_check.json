@@ -1,14 +1,15 @@
 {
-  "time": "2026-07-13 12:06:20",
+  "time": "2026-08-08 05:17:05",
   "total": 270,
-  "ok": 270,
+  "ok": 265,
   "fixed": 0,
-  "failed": 0,
+  "failed": 5,
   "details": [
     {
       "number": 1,
       "bot_id": "bot_1",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 2,
@@ -103,7 +104,8 @@
     {
       "number": 20,
       "bot_id": "bot_19",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 21,
@@ -133,17 +135,20 @@
     {
       "number": 26,
       "bot_id": "bot_25",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 27,
       "bot_id": "bot_26",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 28,
       "bot_id": "bot_27",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 29,
