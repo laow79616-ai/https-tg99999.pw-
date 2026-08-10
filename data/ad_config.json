@@ -4,7 +4,7 @@
     "name": "panel_ad",
     "title": "",
     "text": "✨ 欢迎光临快约到家 ✨\n\n🇲🇾 马来西亚专业上门服务\n✅ 正规按摩 · 安全放心\n✅ 美女技师 · 服务专业\n✅ 全城覆盖 · 快速上门\n\n📱 官网: www.kuaiyue.vip\n📢 频道: @kuaiyue9\n💬 咨询: @kuaiyue123456789",
-    "photo": "/root/bot_panel/data/photos/ad_image.png",
+    "photo": "/root/bot_panel/data/ad_media/ad_20260809_060202.jpg",
     "video": "",
     "buttons": [
       [
@@ -28,5 +28,5 @@
     ]
   },
   "by_line": {},
-  "updated_at": "2026-08-08T05:14:10.151211"
+  "updated_at": "2026-08-09T06:02:09.260246"
 }
