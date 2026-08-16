@@ -1,9 +1,9 @@
 {
-  "time": "2026-08-10 04:31:10",
+  "time": "2026-08-16 08:16:17",
   "total": 469,
-  "ok": 463,
-  "fixed": 1,
-  "failed": 5,
+  "ok": 460,
+  "fixed": 2,
+  "failed": 7,
   "details": [
     {
       "number": 1,
@@ -64,7 +64,8 @@
     {
       "number": 12,
       "bot_id": "bot_12",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 13,
@@ -558,7 +559,8 @@
     {
       "number": 110,
       "bot_id": "bot_104",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 111,
@@ -2318,8 +2320,7 @@
     {
       "number": 462,
       "bot_id": "bot_462",
-      "status": "fixed",
-      "action": "异常修复: ReadError"
+      "status": "ok"
     },
     {
       "number": 463,
@@ -2349,12 +2350,14 @@
     {
       "number": 468,
       "bot_id": "bot_468",
-      "status": "ok"
+      "status": "fixed",
+      "action": "重新注册Webhook"
     },
     {
       "number": 469,
       "bot_id": "bot_469",
-      "status": "ok"
+      "status": "fixed",
+      "action": "重新注册Webhook"
     }
   ]
 }
