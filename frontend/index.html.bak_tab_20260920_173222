@@ -105,6 +105,13 @@
         .btn-check-now { background: linear-gradient(135deg, #9b59b6, #8e44ad); color: #fff; padding: 6px 14px; border: none; border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: bold; }
         .btn-check-now:hover { opacity: 0.9; }
         .btn-check-now:disabled { opacity: 0.5; cursor: not-allowed; }
+    
+        .page-tabs { display:flex; gap:8px; margin:0 0 14px 0; flex-wrap:wrap; }
+        .page-tab { padding:10px 18px; border:none; border-radius:8px; cursor:pointer; font-weight:bold; background:#1a2744; color:#cfe8ff; }
+        .page-tab.active { background:#00d4ff; color:#0d1b2a; }
+        .page-pane { display:none; }
+        .page-pane.active { display:block; }
+
     </style>
 </head>
 <body>
@@ -126,7 +133,16 @@
     </div>
 
     
-            <div class="lines-section">
+            
+        <div class="page-tabs">
+            <button class="page-tab active" data-page="page-check" onclick="showPanelPage('page-check', this)">水军自动检测</button>
+            <button class="page-tab" data-page="page-bots" onclick="showPanelPage('page-bots', this)">Bot列表</button>
+            <button class="page-tab" data-page="page-lines" onclick="showPanelPage('page-lines', this)">代理IP / 线路</button>
+            <button class="page-tab" data-page="page-ad" onclick="showPanelPage('page-ad', this)"><div class="page-pane" id="page-ad">
+广告编辑器</button>
+        </div>
+<div class="page-pane" id="page-lines">
+<div class="lines-section">
             <h3 style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
                 <span>代理IP池 / 线路</span>
                 <span>
@@ -140,6 +156,8 @@
                 <div class="split-right" id="lines-display"></div>
             </div>
         </div>
+        </div>
+
 <div id="proxy-add-modal" class="modal" style="display:none;align-items:center;justify-content:center">
         <div class="modal-content" style="max-width:520px">
             <h3 style="color:#00d4ff;margin-bottom:12px">批量添加代理IP</h3>
@@ -189,7 +207,10 @@
         </div>
     </div>
 
-    <div class="check-section">
+    
+        </div>
+<div class="page-pane active" id="page-check">
+<div class="check-section">
         <h3>水军自动检测（每小时自动检测Bot广告状态）
             <div>
                 <span class="check-time" id="check-time">上次检测: --</span>
@@ -207,8 +228,13 @@
             <div id="check-details-list"></div>
         </div>
     </div>
+        </div>
 
-    <div class="actions">
+
+    
+
+            <div class="page-pane" id="page-bots">
+<div class="actions">
         <button class="btn btn-add" onclick="showAddModal()">+ 添加Bot（自动分配线路）</button>
         <button class="btn btn-batch" onclick="showBatchModal()">批量添加</button>
         <button class="btn btn-check" onclick="checkAll()">一键自检</button>
@@ -218,7 +244,7 @@
         <span class="status-info" id="status-info">Bot: 0/300 | Agent: --</span>
     </div>
 
-            <div class="bot-list">
+<div class="bot-list">
             <h3 style="display:flex;align-items:center;gap:15px;flex-wrap:wrap">Bot列表
                 <div style="display:flex;align-items:center;gap:8px;margin-left:auto">
                     <input type="text" id="search-bot-number" placeholder="输入数字如 25 → kuaiyue25Bot" style="padding:6px 12px;border-radius:4px;border:1px solid #2c3e50;background:#0d1b2a;color:#fff;font-size:13px;width:200px">
@@ -230,6 +256,8 @@
                 <div class="split-right" id="bot-container"></div>
             </div>
         </div>
+        </div>
+
 
     <!-- 添加Bot弹窗 -->
     <div class="modal" id="add-modal">
@@ -961,6 +989,22 @@
             if (document.getElementById('ad-editor-section')) loadAdConfig();
         });
 
-    </script>
+    
+        function showPanelPage(id, btn) {
+            document.querySelectorAll('.page-pane').forEach(function(p){ p.classList.remove('active'); });
+            document.querySelectorAll('.page-tab').forEach(function(t){ t.classList.remove('active'); });
+            var pane = document.getElementById(id);
+            if (pane) pane.classList.add('active');
+            if (btn) btn.classList.add('active');
+            try { localStorage.setItem('panel_page', id); } catch(e) {}
+        }
+        document.addEventListener('DOMContentLoaded', function(){
+            var last = null;
+            try { last = localStorage.getItem('panel_page'); } catch(e) {}
+            var btn = last ? document.querySelector('.page-tab[data-page="'+last+'"]') : document.querySelector('.page-tab');
+            if (btn) showPanelPage(btn.getAttribute('data-page'), btn);
+        });
+
+        </script>
 </body>
 </html>

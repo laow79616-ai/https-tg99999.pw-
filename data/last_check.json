@@ -1,616 +1,657 @@
 {
-  "time": "2026-08-16 08:16:17",
-  "total": 469,
-  "ok": 460,
-  "fixed": 2,
-  "failed": 7,
+  "time": "2026-09-20 16:42:14",
+  "total": 454,
+  "ok": 268,
+  "fixed": 79,
+  "failed": 107,
   "details": [
-    {
-      "number": 1,
-      "bot_id": "bot_1",
-      "status": "failed",
-      "error": "Unauthorized"
-    },
-    {
-      "number": 2,
-      "bot_id": "bot_2",
-      "status": "ok"
-    },
-    {
-      "number": 3,
-      "bot_id": "bot_3",
-      "status": "ok"
-    },
     {
       "number": 4,
       "bot_id": "bot_4",
-      "status": "ok"
+      "status": "failed",
+      "error": "Invalid username/password"
     },
     {
       "number": 5,
       "bot_id": "bot_5",
-      "status": "ok"
+      "status": "failed",
+      "error": "Invalid username/password"
     },
     {
       "number": 6,
       "bot_id": "bot_6",
-      "status": "ok"
+      "status": "failed",
+      "error": "Invalid username/password"
     },
     {
       "number": 7,
       "bot_id": "bot_7",
-      "status": "ok"
+      "status": "failed",
+      "error": "Invalid username/password"
     },
     {
       "number": 8,
       "bot_id": "bot_8",
-      "status": "ok"
+      "status": "failed",
+      "error": "Invalid username/password"
     },
     {
       "number": 9,
       "bot_id": "bot_9",
-      "status": "ok"
+      "status": "failed",
+      "error": "Invalid username/password"
     },
     {
       "number": 10,
       "bot_id": "bot_10",
-      "status": "ok"
+      "status": "failed",
+      "error": "Invalid username/password"
     },
     {
       "number": 11,
       "bot_id": "bot_11",
-      "status": "ok"
-    },
-    {
-      "number": 12,
-      "bot_id": "bot_12",
       "status": "failed",
-      "error": "Unauthorized"
+      "error": "Invalid username/password"
     },
     {
       "number": 13,
       "bot_id": "bot_13",
-      "status": "ok"
+      "status": "failed",
+      "error": "Invalid username/password"
     },
     {
       "number": 14,
       "bot_id": "bot_14",
-      "status": "ok"
+      "status": "failed",
+      "error": "Invalid username/password"
     },
     {
       "number": 15,
       "bot_id": "bot_15",
-      "status": "ok"
+      "status": "failed",
+      "error": "Invalid username/password"
     },
     {
       "number": 16,
       "bot_id": "bot_16",
-      "status": "ok"
+      "status": "failed",
+      "error": "Invalid username/password"
     },
     {
       "number": 17,
       "bot_id": "bot_17",
-      "status": "ok"
+      "status": "failed",
+      "error": "Invalid username/password"
     },
     {
       "number": 18,
       "bot_id": "bot_18",
-      "status": "ok"
-    },
-    {
-      "number": 19,
-      "bot_id": "bot_153",
-      "status": "ok"
-    },
-    {
-      "number": 20,
-      "bot_id": "bot_19",
-      "status": "failed",
-      "error": "Unauthorized"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 21,
       "bot_id": "bot_20",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 22,
       "bot_id": "bot_21",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 23,
       "bot_id": "bot_22",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 24,
       "bot_id": "bot_23",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 25,
       "bot_id": "bot_24",
-      "status": "ok"
-    },
-    {
-      "number": 26,
-      "bot_id": "bot_25",
-      "status": "failed",
-      "error": "Unauthorized"
-    },
-    {
-      "number": 27,
-      "bot_id": "bot_26",
-      "status": "failed",
-      "error": "Unauthorized"
-    },
-    {
-      "number": 28,
-      "bot_id": "bot_27",
-      "status": "failed",
-      "error": "Unauthorized"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 29,
       "bot_id": "bot_28",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 30,
       "bot_id": "bot_29",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 31,
       "bot_id": "bot_30",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 32,
       "bot_id": "bot_31",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 33,
       "bot_id": "bot_154",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 34,
       "bot_id": "bot_32",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 35,
       "bot_id": "bot_155",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 36,
       "bot_id": "bot_33",
-      "status": "ok"
-    },
-    {
-      "number": 37,
-      "bot_id": "bot_34",
-      "status": "ok"
-    },
-    {
-      "number": 38,
-      "bot_id": "bot_35",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 39,
       "bot_id": "bot_36",
-      "status": "ok"
+      "status": "failed",
+      "error": "ConnectTimeout"
     },
     {
       "number": 40,
       "bot_id": "bot_156",
-      "status": "ok"
+      "status": "failed",
+      "error": "ConnectTimeout"
     },
     {
       "number": 41,
       "bot_id": "bot_37",
-      "status": "ok"
+      "status": "failed",
+      "error": "ConnectTimeout"
     },
     {
       "number": 42,
       "bot_id": "bot_38",
-      "status": "ok"
+      "status": "failed",
+      "error": "ConnectTimeout"
     },
     {
       "number": 43,
       "bot_id": "bot_39",
-      "status": "ok"
+      "status": "failed",
+      "error": "ConnectTimeout"
     },
     {
       "number": 44,
       "bot_id": "bot_40",
-      "status": "ok"
+      "status": "failed",
+      "error": "ConnectTimeout"
     },
     {
       "number": 45,
       "bot_id": "bot_41",
-      "status": "ok"
+      "status": "failed",
+      "error": "ConnectTimeout"
     },
     {
       "number": 46,
       "bot_id": "bot_42",
-      "status": "ok"
+      "status": "failed",
+      "error": "ConnectTimeout"
     },
     {
       "number": 47,
       "bot_id": "bot_43",
-      "status": "ok"
+      "status": "failed",
+      "error": "ConnectTimeout"
     },
     {
       "number": 48,
       "bot_id": "bot_44",
-      "status": "ok"
+      "status": "failed",
+      "error": "ConnectTimeout"
     },
     {
       "number": 49,
       "bot_id": "bot_45",
-      "status": "ok"
+      "status": "failed",
+      "error": "Invalid username/password"
     },
     {
       "number": 50,
       "bot_id": "bot_46",
-      "status": "ok"
+      "status": "failed",
+      "error": "Invalid username/password"
     },
     {
       "number": 51,
       "bot_id": "bot_47",
-      "status": "ok"
+      "status": "failed",
+      "error": "Invalid username/password"
     },
     {
       "number": 52,
       "bot_id": "bot_48",
-      "status": "ok"
+      "status": "failed",
+      "error": "Invalid username/password"
     },
     {
       "number": 53,
       "bot_id": "bot_49",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 54,
       "bot_id": "bot_50",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 55,
       "bot_id": "bot_51",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 56,
       "bot_id": "bot_52",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 57,
       "bot_id": "bot_53",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 58,
       "bot_id": "bot_54",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 59,
       "bot_id": "bot_55",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 60,
       "bot_id": "bot_56",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 61,
       "bot_id": "bot_57",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 62,
       "bot_id": "bot_58",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 63,
       "bot_id": "bot_59",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 64,
       "bot_id": "bot_60",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 65,
       "bot_id": "bot_61",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 66,
       "bot_id": "bot_62",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 67,
       "bot_id": "bot_63",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 68,
       "bot_id": "bot_64",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 69,
       "bot_id": "bot_65",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 70,
       "bot_id": "bot_66",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 71,
       "bot_id": "bot_67",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 72,
       "bot_id": "bot_68",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 73,
       "bot_id": "bot_69",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 74,
       "bot_id": "bot_70",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 75,
       "bot_id": "bot_71",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 76,
       "bot_id": "bot_72",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 77,
       "bot_id": "bot_73",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 78,
       "bot_id": "bot_157",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 79,
       "bot_id": "bot_158",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 80,
       "bot_id": "bot_74",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 81,
       "bot_id": "bot_75",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 82,
       "bot_id": "bot_76",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 83,
       "bot_id": "bot_77",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 84,
       "bot_id": "bot_78",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 85,
       "bot_id": "bot_79",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 86,
       "bot_id": "bot_80",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 87,
       "bot_id": "bot_81",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 88,
       "bot_id": "bot_82",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 89,
       "bot_id": "bot_83",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 90,
       "bot_id": "bot_84",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 91,
       "bot_id": "bot_85",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 92,
       "bot_id": "bot_86",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 93,
       "bot_id": "bot_87",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 94,
       "bot_id": "bot_88",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 95,
       "bot_id": "bot_89",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 96,
       "bot_id": "bot_90",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 97,
       "bot_id": "bot_91",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 98,
       "bot_id": "bot_92",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 99,
       "bot_id": "bot_93",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 100,
       "bot_id": "bot_94",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 101,
       "bot_id": "bot_95",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 102,
       "bot_id": "bot_96",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 103,
       "bot_id": "bot_97",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 104,
       "bot_id": "bot_98",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 105,
       "bot_id": "bot_99",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 106,
       "bot_id": "bot_100",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 107,
       "bot_id": "bot_101",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 108,
       "bot_id": "bot_102",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 109,
       "bot_id": "bot_103",
-      "status": "ok"
-    },
-    {
-      "number": 110,
-      "bot_id": "bot_104",
-      "status": "failed",
-      "error": "Unauthorized"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 111,
       "bot_id": "bot_105",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 112,
       "bot_id": "bot_106",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 113,
       "bot_id": "bot_107",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 114,
       "bot_id": "bot_108",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 115,
       "bot_id": "bot_109",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 116,
       "bot_id": "bot_110",
-      "status": "ok"
+      "status": "failed",
+      "error": "Invalid username/password"
     },
     {
       "number": 117,
       "bot_id": "bot_111",
-      "status": "ok"
+      "status": "failed",
+      "error": "Invalid username/password"
     },
     {
       "number": 118,
       "bot_id": "bot_112",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 119,
       "bot_id": "bot_113",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 120,
       "bot_id": "bot_114",
-      "status": "ok"
+      "status": "fixed",
+      "action": "异常修复: Invalid username/password"
     },
     {
       "number": 121,
@@ -670,22 +711,26 @@
     {
       "number": 132,
       "bot_id": "bot_126",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 133,
       "bot_id": "bot_127",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 134,
       "bot_id": "bot_128",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 135,
       "bot_id": "bot_129",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 136,
@@ -715,22 +760,26 @@
     {
       "number": 141,
       "bot_id": "bot_135",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 142,
       "bot_id": "bot_136",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 143,
       "bot_id": "bot_137",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 144,
       "bot_id": "bot_138",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 145,
@@ -775,32 +824,38 @@
     {
       "number": 153,
       "bot_id": "bot_147",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 154,
       "bot_id": "bot_148",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 155,
       "bot_id": "bot_149",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 156,
       "bot_id": "bot_150",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 157,
       "bot_id": "bot_151",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 158,
       "bot_id": "bot_152",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 159,
@@ -1013,11 +1068,6 @@
       "status": "ok"
     },
     {
-      "number": 201,
-      "bot_id": "bot_201",
-      "status": "ok"
-    },
-    {
       "number": 202,
       "bot_id": "bot_202",
       "status": "ok"
@@ -1180,67 +1230,80 @@
     {
       "number": 234,
       "bot_id": "bot_234",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 235,
       "bot_id": "bot_235",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 236,
       "bot_id": "bot_236",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 237,
       "bot_id": "bot_237",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 238,
       "bot_id": "bot_238",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 239,
       "bot_id": "bot_239",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 240,
       "bot_id": "bot_240",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 241,
       "bot_id": "bot_241",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 242,
       "bot_id": "bot_242",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 243,
       "bot_id": "bot_243",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 244,
       "bot_id": "bot_244",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 245,
       "bot_id": "bot_245",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 246,
       "bot_id": "bot_246",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 247,
@@ -1450,12 +1513,14 @@
     {
       "number": 288,
       "bot_id": "bot_288",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 289,
       "bot_id": "bot_289",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 290,
@@ -1470,27 +1535,32 @@
     {
       "number": 292,
       "bot_id": "bot_292",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 293,
       "bot_id": "bot_293",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 294,
       "bot_id": "bot_294",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 295,
       "bot_id": "bot_295",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 296,
       "bot_id": "bot_296",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 297,
@@ -1515,17 +1585,20 @@
     {
       "number": 301,
       "bot_id": "bot_301",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 302,
       "bot_id": "bot_302",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 303,
       "bot_id": "bot_303",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 304,
@@ -1590,7 +1663,8 @@
     {
       "number": 316,
       "bot_id": "bot_316",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 317,
@@ -1605,12 +1679,14 @@
     {
       "number": 319,
       "bot_id": "bot_319",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 320,
       "bot_id": "bot_320",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 321,
@@ -1620,32 +1696,38 @@
     {
       "number": 322,
       "bot_id": "bot_322",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 323,
       "bot_id": "bot_323",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 324,
       "bot_id": "bot_324",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 325,
       "bot_id": "bot_325",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 326,
       "bot_id": "bot_326",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 327,
       "bot_id": "bot_327",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 328,
@@ -1660,7 +1742,8 @@
     {
       "number": 330,
       "bot_id": "bot_330",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 331,
@@ -1725,72 +1808,86 @@
     {
       "number": 343,
       "bot_id": "bot_343",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 344,
       "bot_id": "bot_344",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 345,
       "bot_id": "bot_345",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 346,
       "bot_id": "bot_346",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 347,
       "bot_id": "bot_347",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 348,
       "bot_id": "bot_348",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 349,
       "bot_id": "bot_349",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 350,
       "bot_id": "bot_350",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 351,
       "bot_id": "bot_351",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 352,
       "bot_id": "bot_352",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 353,
       "bot_id": "bot_353",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 354,
       "bot_id": "bot_354",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 355,
       "bot_id": "bot_355",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 356,
       "bot_id": "bot_356",
-      "status": "ok"
+      "status": "failed",
+      "error": "Webhook注册失败"
     },
     {
       "number": 357,
@@ -1800,12 +1897,14 @@
     {
       "number": 358,
       "bot_id": "bot_358",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 359,
       "bot_id": "bot_359",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 360,
@@ -1920,12 +2019,14 @@
     {
       "number": 382,
       "bot_id": "bot_382",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 383,
       "bot_id": "bot_383",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 384,
@@ -1940,12 +2041,14 @@
     {
       "number": 386,
       "bot_id": "bot_386",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 387,
       "bot_id": "bot_387",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 388,
@@ -2150,12 +2253,14 @@
     {
       "number": 428,
       "bot_id": "bot_428",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 429,
       "bot_id": "bot_429",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 430,
@@ -2170,12 +2275,14 @@
     {
       "number": 432,
       "bot_id": "bot_432",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 433,
       "bot_id": "bot_433",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 434,
@@ -2210,12 +2317,14 @@
     {
       "number": 440,
       "bot_id": "bot_440",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 441,
       "bot_id": "bot_441",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 442,
@@ -2240,12 +2349,14 @@
     {
       "number": 446,
       "bot_id": "bot_446",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 447,
       "bot_id": "bot_447",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 448,
@@ -2265,7 +2376,8 @@
     {
       "number": 451,
       "bot_id": "bot_451",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 452,
@@ -2285,7 +2397,8 @@
     {
       "number": 455,
       "bot_id": "bot_455",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 456,
@@ -2295,7 +2408,8 @@
     {
       "number": 457,
       "bot_id": "bot_457",
-      "status": "ok"
+      "status": "failed",
+      "error": "Unauthorized"
     },
     {
       "number": 458,
@@ -2346,18 +2460,6 @@
       "number": 467,
       "bot_id": "bot_467",
       "status": "ok"
-    },
-    {
-      "number": 468,
-      "bot_id": "bot_468",
-      "status": "fixed",
-      "action": "重新注册Webhook"
-    },
-    {
-      "number": 469,
-      "bot_id": "bot_469",
-      "status": "fixed",
-      "action": "重新注册Webhook"
     }
   ]
 }
