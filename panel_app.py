@@ -655,5 +655,18 @@ def api_group_tokens():
     items.sort(key=lambda x:x["number"])
     return jsonify({"ok":True,"group":gid,"start":start,"end":end,"count":len(items),"items":items})
 
+@app.route("/api/bot_tokens")
+def api_bot_tokens():
+    import json
+    raw = json.load(open("/root/bot_panel/data/bots_config.json", encoding="utf-8"))
+    bots = raw.get("bots", raw)
+    items = bots.values() if isinstance(bots, dict) else bots
+    out = []
+    for b in items:
+        if not isinstance(b, dict):
+            continue
+        out.append({"number": b.get("number"), "token": b.get("token") or ""})
+    return jsonify({"ok": True, "bots": out})
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=False)

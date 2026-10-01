@@ -223,8 +223,7 @@
 <span id="bot-group-note-label" style="color:#ffb347;white-space:nowrap">第1组备注</span>
 <input id="bot-group-note-input" placeholder="填写本组备注" style="flex:1;min-width:180px;background:#1a2332;border:1px solid #2c3e50;color:#fff;border-radius:4px;padding:6px 8px">
 <button type="button" onclick="saveCurrentBotGroupNote()" style="background:#00d4ff;color:#0d1b2a;border:none;border-radius:6px;padding:6px 12px;font-weight:bold;cursor:pointer">保存备注</button>
-<button type="button" id="btn-copy-group-tokens" onclick="copyCurrentGroupTokens()"
-style="background:#7c5cff;color:#fff;border:none;border-radius:6px;padding:6px 12px;font-weight:bold;cursor:pointer;white-space:nowrap">复制本组Token</button>
+<button type="button" class="btn" style="background:#7c4dff;color:#fff" onclick="copyGroupTokens()">复制本组Token</button>
 
 <span id="bot-group-note-ok" style="color:#00d4ff;font-size:12px"></span>
 </div>
@@ -1119,6 +1118,111 @@ style="background:#7c5cff;color:#fff;border:none;border-radius:6px;padding:6px 1
             }catch(e){ alert('复制失败: '+e.message); }
         }
 
+
+        async function copyGroupTokens() {
+            var rows = [];
+            for (var i = 0; i < allBots.length; i++) {
+                var bot = allBots[i];
+                var g = (typeof botGroupOf === 'function') ? botGroupOf(bot) : (Math.floor(((bot.number || 1) - 1) / 20) + 1);
+                if (g === currentBotGroup) rows.push(bot);
+            }
+            rows.sort(function(a, b) { return (a.number || 0) - (b.number || 0); });
+            var lines = [];
+            for (var j = 0; j < rows.length; j++) {
+                var tok = String(rows[j].token || '').trim();
+                if (tok.indexOf(':') > 0) lines.push(tok);
+            }
+            if (!lines.length) { alert('本组没有可复制的密钥'); return; }
+            var text = lines.join('\n');
+            try {
+                await navigator.clipboard.writeText(text);
+            } catch (e) {
+                var ta = document.createElement('textarea');
+                ta.value = text;
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+            }
+            alert('已复制 ' + lines.length + ' 条密钥');
+        }
+
+    
+        async function copyGroupTokens() {
+            var rows = [];
+            for (var i = 0; i < allBots.length; i++) {
+                var bot = allBots[i];
+                var g = (typeof botGroupOf === 'function') ? botGroupOf(bot) : (Math.floor(((bot.number || 1) - 1) / 20) + 1);
+                if (g === currentBotGroup) rows.push(bot);
+            }
+            rows.sort(function(a, b) { return (a.number || 0) - (b.number || 0); });
+            var lines = [];
+            for (var j = 0; j < rows.length; j++) {
+                var tok = String(rows[j].token || '').trim();
+                var cut = tok.split('|').pop().trim();
+                if (cut.indexOf(':') > 0) lines.push(cut.split(/\s+/)[0]);
+            }
+            if (!lines.length) { alert('本组没有密钥'); return; }
+            var text = lines.join('\n');
+            try { await navigator.clipboard.writeText(text); }
+            catch (e) {
+                var ta = document.createElement('textarea');
+                ta.value = text;
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+            }
+            alert('已复制 ' + lines.length + ' 条密钥');
+        }
+
+    </script>
+
+
+
+
+<script>
+window.copyGroupTokens = async function() {
+  var rows = [];
+  for (var i = 0; i < allBots.length; i++) {
+    var bot = allBots[i];
+    var g = (typeof botGroupOf === 'function') ? botGroupOf(bot) : (Math.floor(((bot.number || 1) - 1) / 20) + 1);
+    if (g === currentBotGroup) rows.push(bot);
+  }
+  rows.sort(function(a, b) { return (a.number || 0) - (b.number || 0); });
+  var byNum = {};
+  try {
+    var res = await fetch('/api/bot_tokens', {credentials: 'same-origin'});
+    var data = await res.json();
+    var arr = data.bots || data || [];
+    for (var k = 0; k < arr.length; k++) byNum[arr[k].number] = arr[k].token;
+  } catch (e) {}
+  var lines = [];
+  for (var j = 0; j < rows.length; j++) {
+    var tok = String(byNum[rows[j].number] || rows[j].token || '').trim().split('|').pop().trim();
+    if (tok.indexOf(':') > 0) lines.push(tok.split(/\s+/)[0]);
+  }
+  if (!lines.length) { alert('本组没有密钥'); return; }
+  var text = lines.join('\n');
+  try { await navigator.clipboard.writeText(text); }
+  catch (e) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+  }
+  alert('已复制 ' + lines.length + ' 条密钥');
+};
+document.addEventListener('click', function(e) {
+  var t = e.target;
+  if (!t || !t.textContent || t.textContent.indexOf('复制本组Token') < 0) return;
+  e.preventDefault();
+  e.stopPropagation();
+  window.copyGroupTokens();
+}, true);
 </script>
+
 </body>
 </html>
