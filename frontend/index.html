@@ -390,19 +390,66 @@ style="background:#7c5cff;color:#fff;border:none;border-radius:6px;padding:6px 1
             olds.sort(byn); fresh.sort(byn); news.sort(byn);
             return olds.concat(fresh).concat(news);
         }
+
+        function botGroupOf(bot) {
+            var g = parseInt(bot.group || bot.grp || 0, 10);
+            if (g > 0) return g;
+            var n = bot.number || 1;
+            return Math.floor((n - 1) / BOT_GROUP_SIZE) + 1;
+        }
         function renderBotGroups() {
             var box = document.getElementById('bot-group-list');
             if (!box) return;
-            var arr = packedBots();
+            var counts = {};
+            var maxG = 1;
+            for (var i = 0; i < allBots.length; i++) {
+                var g = botGroupOf(allBots[i]);
+                counts[g] = (counts[g] || 0) + 1;
+                if (g > maxG) maxG = g;
+            }
+            var showN = Math.max(BOT_GROUP_COUNT, maxG + 1);
             var html = '';
-            for (var g = 1; g <= BOT_GROUP_COUNT; g++) {
-                var slice = arr.slice((g - 1) * BOT_GROUP_SIZE, g * BOT_GROUP_SIZE);
-                var cnt = slice.length;
-                var sub = cnt ? ('#' + slice[0].number + '-#' + slice[slice.length - 1].number + ' · ' + cnt + '/20' + (cnt>=20 ? ' 已满' : '')) : '空 · 待新增';
-                html += '<button class="grp-item' + (g === currentBotGroup ? ' active' : '') + '" onclick="selectBotGroup(' + g + ')">第' + g + '组<span class="g-sub">' + sub + '</span></button>';
+            for (var g = 1; g <= showN; g++) {
+                var cnt = counts[g] || 0;
+                var full = cnt >= BOT_GROUP_SIZE ? ' 已满' : '';
+                html += '<button class="grp-item' + (g === currentBotGroup ? ' active' : '') + '" onclick="selectBotGroup(' + g + ')">第' + g + '组<span class="g-sub">' + cnt + '/' + BOT_GROUP_SIZE + full + '</span></button>';
             }
             box.innerHTML = html;
+            var sel = document.getElementById('add-group');
+            if (sel) {
+                var cur = sel.value;
+                var opt = '<option value="">自动放到未满组</option>';
+                for (var g2 = 1; g2 <= showN; g2++) {
+                    var c2 = counts[g2] || 0;
+                    opt += '<option value="' + g2 + '">第' + g2 + '组 ' + c2 + '/' + BOT_GROUP_SIZE + '</option>';
+                }
+                sel.innerHTML = opt;
+                if (cur) sel.value = cur;
+            }
         }
+        function renderBotRight() {
+            var container = document.getElementById('bot-container');
+            if (!container) return;
+            var rows = [];
+            for (var i = 0; i < allBots.length; i++) {
+                if (botGroupOf(allBots[i]) === currentBotGroup) rows.push(allBots[i]);
+            }
+            rows.sort(function(a, b) { return (a.number || 0) - (b.number || 0); });
+            var html = '<div class="grp-title">第' + currentBotGroup + '组 · ' + rows.length + '/' + BOT_GROUP_SIZE + '（固定组，删除不挪人）</div>';
+            if (!rows.length) {
+                container.innerHTML = html + '<div style="color:#8899aa">本组空位，可单个添加选这组</div>';
+                return;
+            }
+            html += '<div class="bot-grid">';
+            for (var j = 0; j < rows.length; j++) {
+                var bot = rows[j];
+                var un = bot.username ? '@' + String(bot.username).replace(/^@/, '') : '';
+                html += '<div class="bot-card"><div class="bot-info"><div class="bot-number">#' + bot.number + ' ' + un + ' | 线路' + (bot.line || '') + '</div><div class="bot-stats">发送:' + (bot.sent || 0) + ' 成功:' + (bot.success || 0) + ' 失败:' + (bot.failed || 0) + '</div></div><div class="bot-actions"><button class="btn-sm btn-del" onclick="removeBot(' + bot.number + ')">删除</button></div></div>';
+            }
+            html += '</div>';
+            container.innerHTML = html;
+        }
+
         function selectBotGroup(g) {
             currentBotGroup = g;
             renderBotGroups();
@@ -556,7 +603,7 @@ style="background:#7c5cff;color:#fff;border:none;border-radius:6px;padding:6px 1
                 const result = await fetchAPI(`${API_BASE}/api/batch_add`, {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({ tokens })
+                    body: JSON.stringify({ tokens, assign: 'append' })
                 });
                 alert(`批量添加完成! 共处理 ${result.total} 个`);
                 closeModal('batch-modal');

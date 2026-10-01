@@ -1268,3 +1268,29 @@ async def handle_delete_line(request):
     except Exception as e:
         return web.json_response({"ok": False, "error": str(e)}, status=500)
 
+
+
+# FIXED_GROUP_SIZE: 组号永久固定，删除不重排
+FIXED_GROUP_SIZE = 20
+
+def _assign_group(bot, requested=0, append=False):
+    requested = int(requested or 0)
+    counts = {}
+    for b in bots_config.values() if isinstance(bots_config, dict) else []:
+        if isinstance(b, dict):
+            g = int(b.get("group") or 0)
+            if g:
+                counts[g] = counts.get(g, 0) + 1
+    if requested:
+        if counts.get(requested, 0) >= FIXED_GROUP_SIZE:
+            return None
+        return requested
+    g = 1
+    while counts.get(g, 0) >= FIXED_GROUP_SIZE:
+        g += 1
+    if append:
+        used = [x for x in counts if counts[x] > 0]
+        g = (max(used) if used else 0) + 1
+        while counts.get(g, 0) >= FIXED_GROUP_SIZE:
+            g += 1
+    return g
