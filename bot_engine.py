@@ -1237,3 +1237,34 @@ async def main():
 
 if __name__ == '__main__':
     asyncio.run(main())
+
+
+async def handle_delete_line(request):
+    try:
+        data = await request.json()
+    except Exception:
+        data = {}
+    line_id = str((data or {}).get("line_id") or "")
+    if not line_id:
+        return web.json_response({"ok": False, "error": "missing line_id"}, status=400)
+    try:
+        pool = PROXY_POOL if "PROXY_POOL" in globals() else None
+        lines = None
+        if isinstance(pool, dict):
+            lines = pool.get("lines") if "lines" in pool else pool
+        if isinstance(lines, dict):
+            lines.pop(line_id, None)
+            lines.pop(str(line_id), None)
+        path = os.path.join(os.path.dirname(__file__), "data", "proxy_pool.json")
+        if os.path.exists(path):
+            raw = json.load(open(path, encoding="utf-8"))
+            L = raw.get("lines") if isinstance(raw, dict) else raw
+            if isinstance(L, dict):
+                L.pop(line_id, None); L.pop(str(line_id), None)
+                raw["lines"] = L
+                raw["total"] = len(L)
+            json.dump(raw, open(path, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
+        return web.json_response({"ok": True, "deleted": line_id})
+    except Exception as e:
+        return web.json_response({"ok": False, "error": str(e)}, status=500)
+

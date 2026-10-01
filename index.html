@@ -219,6 +219,16 @@
     </div>
 
             <div class="bot-list">
+<div id="bot-group-note-bar" style="display:flex;gap:8px;align-items:center;margin:8px 0 12px;flex-wrap:wrap">
+<span id="bot-group-note-label" style="color:#ffb347;white-space:nowrap">第1组备注</span>
+<input id="bot-group-note-input" placeholder="填写本组备注" style="flex:1;min-width:180px;background:#1a2332;border:1px solid #2c3e50;color:#fff;border-radius:4px;padding:6px 8px">
+<button type="button" onclick="saveCurrentBotGroupNote()" style="background:#00d4ff;color:#0d1b2a;border:none;border-radius:6px;padding:6px 12px;font-weight:bold;cursor:pointer">保存备注</button>
+<button type="button" id="btn-copy-group-tokens" onclick="copyCurrentGroupTokens()"
+style="background:#7c5cff;color:#fff;border:none;border-radius:6px;padding:6px 12px;font-weight:bold;cursor:pointer;white-space:nowrap">复制本组Token</button>
+
+<span id="bot-group-note-ok" style="color:#00d4ff;font-size:12px"></span>
+</div>
+
             <h3 style="display:flex;align-items:center;gap:15px;flex-wrap:wrap">Bot列表
                 <div style="display:flex;align-items:center;gap:8px;margin-left:auto">
                     <input type="text" id="search-bot-number" placeholder="输入数字如 25 → kuaiyue25Bot" style="padding:6px 12px;border-radius:4px;border:1px solid #2c3e50;background:#0d1b2a;color:#fff;font-size:13px;width:200px">
@@ -355,19 +365,41 @@
             linesDiv.innerHTML = html;
         }
 
+        function isNewBot(b) {
+            var u = String((b && b.username) || '').replace(/^@/, '');
+            return !u || /^\d{1,6}$/.test(u);
+        }
+        function firstOpenGroup() {
+            var arr = (typeof packedBots==='function') ? packedBots() : (allBots||[]);
+            var size = window.BOT_GROUP_SIZE || 20;
+            var g = Math.floor(arr.length / size) + 1;
+            if (g < 1) g = 1;
+            if (g > (window.BOT_GROUP_COUNT || 25)) g = window.BOT_GROUP_COUNT || 25;
+            return g;
+        }
+        function packedBots() {
+            var arr = (allBots || []).slice();
+            var olds = [], fresh = [], news = [];
+            arr.forEach(function(b){
+                var n = parseInt(b && b.number, 10) || 0;
+                if (n >= 464) fresh.push(b);
+                else if (isNewBot(b)) news.push(b);
+                else olds.push(b);
+            });
+            var byn = function(a, b){ return (a.number || 0) - (b.number || 0); };
+            olds.sort(byn); fresh.sort(byn); news.sort(byn);
+            return olds.concat(fresh).concat(news);
+        }
         function renderBotGroups() {
             var box = document.getElementById('bot-group-list');
             if (!box) return;
+            var arr = packedBots();
             var html = '';
             for (var g = 1; g <= BOT_GROUP_COUNT; g++) {
-                var a = (g - 1) * BOT_GROUP_SIZE + 1;
-                var b = g * BOT_GROUP_SIZE;
-                var cnt = 0;
-                for (var i = 0; i < allBots.length; i++) {
-                    var n = allBots[i].number || 0;
-                    if (n >= a && n <= b) cnt++;
-                }
-                html += '<button class="grp-item' + (g === currentBotGroup ? ' active' : '') + '" onclick="selectBotGroup(' + g + ')">第' + g + '组<span class="g-sub">编号 ' + a + '-' + b + ' · ' + cnt + '个</span></button>';
+                var slice = arr.slice((g - 1) * BOT_GROUP_SIZE, g * BOT_GROUP_SIZE);
+                var cnt = slice.length;
+                var sub = cnt ? ('#' + slice[0].number + '-#' + slice[slice.length - 1].number + ' · ' + cnt + '/20' + (cnt>=20 ? ' 已满' : '')) : '空 · 待新增';
+                html += '<button class="grp-item' + (g === currentBotGroup ? ' active' : '') + '" onclick="selectBotGroup(' + g + ')">第' + g + '组<span class="g-sub">' + sub + '</span></button>';
             }
             box.innerHTML = html;
         }
@@ -379,18 +411,15 @@
         function renderBotRight() {
             var container = document.getElementById('bot-container');
             if (!container) return;
-            var a = (currentBotGroup - 1) * BOT_GROUP_SIZE + 1;
-            var b = currentBotGroup * BOT_GROUP_SIZE;
-            var rows = [];
-            for (var i = 0; i < allBots.length; i++) {
-                var n = allBots[i].number || 0;
-                if (n >= a && n <= b) rows.push(allBots[i]);
-            }
+            var arr = packedBots();
+            var rows = arr.slice((currentBotGroup - 1) * BOT_GROUP_SIZE, currentBotGroup * BOT_GROUP_SIZE);
+            var a = rows.length ? rows[0].number : '-';
+            var b = rows.length ? rows[rows.length - 1].number : '-';
             if (allBots.length === 0) {
                 container.innerHTML = '<div class="loading">暂无Bot，请添加</div>';
                 return;
             }
-            var html = '<div class="grp-title">第' + currentBotGroup + '组 · 编号 ' + a + '-' + b + '（每组最多20个）</div>';
+            var html = '<div class="grp-title">第' + currentBotGroup + '组 · #' + a + '-#' + b + '（' + rows.length + '/20，）</div>';
             html += '<div class="bot-grid">';
             for (var j = 0; j < rows.length; j++) {
                 var bot = rows[j];
@@ -718,7 +747,10 @@
                 if (n === keyword || (m && m[1] === keyword)) { foundBot = allBots[i]; break; }
             }
             if (!foundBot) { alert('未找到包含数字 ' + keyword + ' 的Bot'); return; }
-            var gn = Math.floor(((foundBot.number || 1) - 1) / (typeof BOT_GROUP_SIZE!=='undefined'?BOT_GROUP_SIZE:20)) + 1;
+            var pk = (typeof packedBots==='function'?packedBots():(allBots||[]));
+            var ix = 0;
+            for (var pi = 0; pi < pk.length; pi++) { if (pk[pi].number === foundBot.number) { ix = pi; break; } }
+            var gn = Math.floor(ix / (typeof BOT_GROUP_SIZE!=='undefined'?BOT_GROUP_SIZE:20)) + 1;
             if (typeof selectBotGroup === 'function') selectBotGroup(gn);
             setTimeout(function() {
                 var cards = document.querySelectorAll('.bot-card');
@@ -961,6 +993,85 @@
             if (document.getElementById('ad-editor-section')) loadAdConfig();
         });
 
-    </script>
+    
+        window._botGroupNotes = window._botGroupNotes || {};
+        window._currentBotGroup = window._currentBotGroup || 1;
+        async function loadBotGroupNotes(){
+            try{
+                var r = await fetchAPI((typeof API_BASE!=='undefined'?API_BASE:'')+'/api/bot_group_notes');
+                window._botGroupNotes = (r && r.notes) ? r.notes : {};
+            }catch(e){}
+            fillCurrentBotGroupNote();
+        }
+        function fillCurrentBotGroupNote(){
+            var gid = String(window._currentBotGroup||1);
+            var lab = document.getElementById('bot-group-note-label');
+            var inp = document.getElementById('bot-group-note-input');
+            if (lab) lab.textContent = '第'+gid+'组备注';
+            if (inp) inp.value = (window._botGroupNotes && window._botGroupNotes[gid]) || '';
+        }
+        async function saveCurrentBotGroupNote(){
+            var gid = String(window._currentBotGroup||1);
+            var inp = document.getElementById('bot-group-note-input');
+            var text = inp ? inp.value : '';
+            try{
+                var r = await fetchAPI((typeof API_BASE!=='undefined'?API_BASE:'')+'/api/bot_group_notes',{
+                    method:'POST', headers:{'Content-Type':'application/json'},
+                    body: JSON.stringify({group:gid, note:text})
+                });
+                if(r && r.ok===false){ alert('保存失败'); return; }
+                window._botGroupNotes[gid]=text;
+                var ok=document.getElementById('bot-group-note-ok');
+                if(ok){ ok.textContent='已保存'; setTimeout(function(){ok.textContent='';},1500); }
+            }catch(e){ alert('保存失败: '+e.message); }
+        }
+        (function(){
+            var _old = window.selectBotGroup;
+            if (typeof _old === 'function' && !_old._noteWrapped){
+                window.selectBotGroup = function(n){
+                    window._currentBotGroup = n;
+                    try{ fillCurrentBotGroupNote(); }catch(e){}
+                    return _old.apply(this, arguments);
+                };
+                window.selectBotGroup._noteWrapped = true;
+            }
+            document.addEventListener('DOMContentLoaded', function(){ loadBotGroupNotes(); });
+        })();
+
+        
+        function botsOfCurrentGroup(){
+            var size = window.BOT_GROUP_SIZE || 20;
+            var gid = parseInt(window._currentBotGroup || window.currentBotGroup || 1, 10) || 1;
+            var start = (gid-1)*size + 1;
+            var end = gid*size;
+            var src = window.allBots || window.BOTS || window.botsData || [];
+            if (!Array.isArray(src)) {
+                var tmp=[];
+                Object.keys(src||{}).forEach(function(k){ var b=src[k]; if(b&&typeof b==='object'){ b.number=b.number||k; tmp.push(b);} });
+                src=tmp;
+            }
+            return src.filter(function(b){
+                var n=parseInt(b.number||b.id||b.no||0,10);
+                return n>=start && n<=end;
+            }).sort(function(a,b){return (parseInt(a.number,10)||0)-(parseInt(b.number,10)||0);});
+        }
+        
+        
+        async function copyCurrentGroupTokens(){
+            var gid = parseInt(window._currentBotGroup||1,10)||1;
+            var title = document.body.innerText.match(/第\s*(\d+)\s*组\s*[·.]\s*编号/);
+            if (title) gid=parseInt(title[1],10);
+            var r = await fetchAPI((typeof API_BASE!=='undefined'?API_BASE:'')+'/api/group_tokens?group='+gid+'&size=20');
+            var items = (r && r.items) || [];
+            if (!items.length){ alert('本组没有Bot group='+gid+' api='+JSON.stringify(r).slice(0,120)); return; }
+            var lines=items.map(function(b){ return (b.number||'')+' | @'+String(b.username||'').replace(/^@/,'')+' | '+(b.token||''); }).join('\n');
+            try{
+                if(navigator.clipboard&&navigator.clipboard.writeText) await navigator.clipboard.writeText(lines);
+                else { var ta=document.createElement('textarea'); ta.value=lines; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta); }
+                alert('已复制第'+gid+'组 '+items.length+' 条Token');
+            }catch(e){ alert('复制失败: '+e.message); }
+        }
+
+</script>
 </body>
 </html>

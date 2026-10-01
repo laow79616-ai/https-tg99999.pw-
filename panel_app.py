@@ -564,5 +564,96 @@ def api_ad_upload():
         return jsonify({"error": str(e)}), 500
 
 
+
+@app.route("/api/proxy_pool/delete_line", methods=["POST"])
+def api_proxy_pool_delete_line():
+    """只删线路，不删 Bot。"""
+    try:
+        payload = request.get_json(force=True, silent=True) or {}
+        line_id = str(payload.get("line_id") or payload.get("id") or "").strip()
+        if not line_id:
+            return jsonify({"ok": False, "error": "missing line_id"}), 400
+        # 优先转引擎
+        try:
+            r = requests.post(ENGINE_URL.rstrip("/") + "/proxy_pool/delete_line",
+                              json={"line_id": line_id}, timeout=ENGINE_TIMEOUT)
+            if r.status_code == 200:
+                return jsonify(r.json())
+        except Exception:
+            pass
+        pool_path = os.path.join(os.path.dirname(__file__), "data", "proxy_pool.json")
+        if not os.path.exists(pool_path):
+            return jsonify({"ok": False, "error": "no proxy_pool.json"}), 404
+        pool = json.load(open(pool_path, encoding="utf-8"))
+        lines = pool.get("lines") if isinstance(pool, dict) else pool
+        if isinstance(lines, dict):
+            if line_id not in lines and str(line_id) not in lines:
+                return jsonify({"ok": False, "error": "line not found"}), 404
+            lines.pop(line_id, None)
+            lines.pop(str(line_id), None)
+            pool["lines"] = lines
+            pool["total"] = len(lines)
+        elif isinstance(lines, list):
+            pool["lines"] = [x for x in lines if str(x.get("line_id") or x.get("id")) != line_id]
+            pool["total"] = len(pool["lines"])
+        json.dump(pool, open(pool_path, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
+        return jsonify({"ok": True, "deleted": line_id, "total": pool.get("total")})
+    except Exception as e:
+        return jsonify({"ok": False, "error": str(e)}), 500
+
+@app.route("/api/bot_group_notes", methods=["GET", "POST"])
+def api_bot_group_notes():
+    path = os.path.join(os.path.dirname(__file__), "data", "bot_group_notes.json")
+    if request.method == "GET":
+        data = {}
+        if os.path.exists(path):
+            try:
+                data = json.load(open(path, encoding="utf-8"))
+            except Exception:
+                data = {}
+        return jsonify({"ok": True, "notes": data})
+    payload = request.get_json(force=True, silent=True) or {}
+    notes = {}
+    if os.path.exists(path):
+        try:
+            notes = json.load(open(path, encoding="utf-8")) or {}
+        except Exception:
+            notes = {}
+    if "notes" in payload and isinstance(payload["notes"], dict):
+        notes.update({str(k): str(v) for k, v in payload["notes"].items()})
+    else:
+        gid = str(payload.get("group") or payload.get("id") or "").strip()
+        text = str(payload.get("note") or payload.get("text") or "")
+        if not gid:
+            return jsonify({"ok": False, "error": "missing group"}), 400
+        notes[gid] = text
+    json.dump(notes, open(path, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
+    return jsonify({"ok": True, "notes": notes})
+
+
+@app.route("/api/group_tokens", methods=["GET"])
+def api_group_tokens():
+    gid = int(request.args.get("group") or 1)
+    size = int(request.args.get("size") or 20)
+    start = (gid-1)*size + 1
+    end = gid*size
+    path = os.path.join(os.path.dirname(__file__), "data", "bots_config.json")
+    cfg = json.load(open(path, encoding="utf-8"))
+    bots = cfg.get("bots", cfg)
+    items=[]
+    if isinstance(bots, dict):
+        for k,v in bots.items():
+            if not isinstance(v, dict): continue
+            n=int(str(v.get("number") or k or 0) or 0)
+            if start<=n<=end:
+                items.append({"number":n,"username":v.get("username") or "","token":(v.get("token") or v.get("bot_token") or "")})
+    else:
+        for v in bots:
+            n=int(str((v or {}).get("number") or 0) or 0)
+            if start<=n<=end:
+                items.append({"number":n,"username":(v or {}).get("username") or "","token":((v or {}).get("token") or (v or {}).get("bot_token") or "")})
+    items.sort(key=lambda x:x["number"])
+    return jsonify({"ok":True,"group":gid,"start":start,"end":end,"count":len(items),"items":items})
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=False)
