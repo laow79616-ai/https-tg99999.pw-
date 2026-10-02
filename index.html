@@ -166,7 +166,7 @@
                 <input id="ad-title" style="width:100%;padding:8px;background:#1a2332;border:1px solid #2c3e50;color:#fff;border-radius:4px;margin-bottom:8px">
                 <label style="color:#aaa;font-size:12px">文案</label>
                 <textarea id="ad-text" rows="8" style="width:100%;padding:8px;background:#1a2332;border:1px solid #2c3e50;color:#fff;border-radius:4px"></textarea>
-                <label style="color:#aaa;font-size:12px;display:block;margin-top:8px">按钮（每行：按钮文字 | https://链接）</label>
+                <label style="color:#aaa;font-size:12px;display:block;margin-top:8px">按钮（每行：按钮文字 | 链接。可写 https://、www. 或 @用户名，保存时自动修正）</label>
                 <textarea id="ad-buttons" rows="4" style="width:100%;padding:8px;background:#1a2332;border:1px solid #2c3e50;color:#fff;border-radius:4px" placeholder="访问官网 | https://www.kuaiyue.vip"></textarea>
             </div>
             <div>
@@ -972,18 +972,30 @@
                 }
             } catch (e) { console.log(e); }
         }
+        function fixAdUrl(u) {
+            u = (u || '').trim();
+            if (u.charAt(0) === '@') return 'https://t.me/' + u.slice(1);
+            if (u.indexOf('t.me/') === 0) return 'https://' + u;
+            if (u && u.indexOf('http://') !== 0 && u.indexOf('https://') !== 0) return 'https://' + u;
+            return u;
+        }
         function parseAdButtons() {
             var text = document.getElementById('ad-buttons').value || '';
             var rows = [];
+            var shown = [];
             text.split('\n').forEach(function(line) {
                 line = line.trim();
                 if (!line) return;
                 var parts = line.split('|');
                 if (parts.length < 2) return;
                 var t = parts[0].trim();
-                var u = parts.slice(1).join('|').trim();
-                if (t && u) rows.push([{text: t, url: u}]);
+                var u = fixAdUrl(parts.slice(1).join('|').trim());
+                if (t && u) {
+                    rows.push([{text: t, url: u}]);
+                    shown.push(t + ' | ' + u);
+                }
             });
+            document.getElementById('ad-buttons').value = shown.join('\n');
             return rows;
         }
         async function uploadAdFile(inputId, targetId) {

@@ -2,31 +2,31 @@
   "version": 2,
   "default": {
     "name": "panel_ad",
-    "title": "",
-    "text": "✨ 欢迎光临快约到家 ✨\n\n🇲🇾 马来西亚专业上门服务\n✅ 正规按摩 · 安全放心\n✅ 美女技师 · 服务专业\n✅ 全城覆盖 · 快速上门\n\n📱 官网: www.kuaiyue.vip\n📢 频道: @kuaiyue9\n💬 咨询: @kuaiyue123456789",
-    "photo": "/root/bot_panel/data/ad_media/ad_20260809_060202.jpg",
+    "title": "黑桃短剧采集站",
+    "text": "✨ 黑桃短剧资源站 ✨\n      战长采集\n\n\n✅ 资源更新，修复，下架\n✅ 分类调整\n✅ 采集用法和临时维护\n\n📱 官网: www.heitaodj.com\n📢 频道: https://t.me/heitaodj\n💬 咨询: @azhezxz",
+    "photo": "/root/bot_panel/data/ad_media/ad_20261002_064607.jpg",
     "video": "",
     "buttons": [
       [
         {
           "text": "🌐 访问官网",
-          "url": "https://www.kuaiyue.vip"
+          "url": "https://www.heitaodj.com"
         }
       ],
       [
         {
           "text": "📢 加入频道",
-          "url": "https://t.me/kuaiyue9"
+          "url": "https://t.me/heitaodj"
         }
       ],
       [
         {
           "text": "💬 在线咨询",
-          "url": "https://t.me/kuaiyue123456789"
+          "url": "https://t.me/azhezxz"
         }
       ]
     ]
   },
   "by_line": {},
-  "updated_at": "2026-08-09T06:02:09.260246"
+  "updated_at": "2026-10-02T06:46:38.903907"
 }

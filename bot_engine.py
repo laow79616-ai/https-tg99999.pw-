@@ -302,26 +302,12 @@ class BotEngine:
             logger.error(f"Bot #{number} 处理消息错误: {e}")
 
     async def send_welcome(self, token, proxy_url, chat_id, bot_number):
-        """发送欢迎消息+广告"""
+        """ /start 只发已保存广告，不再发旧欢迎语 """
         try:
-            client = await self.get_client(proxy_url)
-            welcome_text = (
-                f"\U0001f1f2\U0001f1fe 欢迎来到 马来西亚-快约到家！\n\n"
-                f"• 管理推广素材 [图片+文案+按钮]\n"
-                f"• 预览推广消息效果\n"
-                f"• 自动轮换发送，避免限流\n"
-                f"• 频率控制，保护账号安全\n\n"
-                f"请使用下方菜单操作 \U0001f447\n"
-                f"或输入 /help 查看详细帮助"
-            )
-            url = f"https://api.telegram.org/bot{token}/sendMessage"
-            payload = {"chat_id": chat_id, "text": welcome_text}
-            await client.post(url, json=payload)
-
-            await asyncio.sleep(0.3)
-            await self.send_ad_to_chat(token, proxy_url, chat_id, line_id=get_line_for_number(bot_number))
-        except Exception as e:
-            logger.error(f"发送欢迎消息失败: {e}")
+            await self.reload_ad_config()
+        except Exception:
+            self.load_ad_config()
+        await self.send_ad_to_chat(token, proxy_url, chat_id, line_id=get_line_for_number(bot_number))
 
     async def send_ad_to_chat(self, token, proxy_url, chat_id, line_id=None):
         """发送广告到指定聊天"""
@@ -353,12 +339,24 @@ class BotEngine:
             photo_path = ad_mod.resolve_media_path(ad.get('photo') or '')
             video_path = ad_mod.resolve_media_path(ad.get('video') or '')
 
+            def _fix_url(u):
+                u = (u or '').strip()
+                if u.startswith('@'):
+                    return 'https://t.me/' + u[1:]
+                if u.startswith('t.me/'):
+                    return 'https://' + u
+                if u and not u.startswith('http://') and not u.startswith('https://'):
+                    return 'https://' + u
+                return u
             inline_keyboard = []
             for btn in buttons:
-                if isinstance(btn, list):
-                    inline_keyboard.append(btn)
-                elif isinstance(btn, dict):
-                    inline_keyboard.append([{"text": btn['text'], "url": btn['url']}])
+                items = btn if isinstance(btn, list) else [btn]
+                row = []
+                for b in items:
+                    if isinstance(b, dict) and b.get('text') and b.get('url'):
+                        row.append({"text": b['text'], "url": _fix_url(b['url'])})
+                if row:
+                    inline_keyboard.append(row)
 
             if video_path and os.path.exists(video_path):
                 url = f"https://api.telegram.org/bot{token}/sendVideo"
@@ -369,6 +367,8 @@ class BotEngine:
                         data['reply_markup'] = json.dumps({"inline_keyboard": inline_keyboard})
                     resp = await client.post(url, data=data, files=files)
                     result = resp.json()
+                    if not result.get("ok"):
+                        logger.error("广告发送失败: %s", result)
             elif photo_path and os.path.exists(photo_path):
                 url = f"https://api.telegram.org/bot{token}/sendPhoto"
                 with open(photo_path, 'rb') as img:
@@ -378,6 +378,8 @@ class BotEngine:
                         data['reply_markup'] = json.dumps({"inline_keyboard": inline_keyboard})
                     resp = await client.post(url, data=data, files=files)
                     result = resp.json()
+                    if not result.get("ok"):
+                        logger.error("广告发送失败: %s", result)
             elif os.path.exists(AD_IMAGE_FILE):
                 url = f"https://api.telegram.org/bot{token}/sendPhoto"
                 with open(AD_IMAGE_FILE, 'rb') as img:
